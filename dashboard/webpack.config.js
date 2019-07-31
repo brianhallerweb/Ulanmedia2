@@ -26,11 +26,11 @@ module.exports = {
     proxy: [
       {
         context: ['/api/'],
-        target: 'http://localhost:3000',
+        target: 'http://localhost:3001',
       },
       {
         context: ['/jsonapi/'],
-        target: 'http://localhost:5000',
+        target: 'http://localhost:5001',
       },
     ],
     historyApiFallback: true,
