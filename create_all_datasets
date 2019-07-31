@@ -1,0 +1,17 @@
+#!/bin/sh 
+cd $ULANMEDIA2APP/scripts/data_acquisition_scripts && pipenv run python create_conversions_for_each_campaign_datasets.py
+cd $ULANMEDIA2APP/scripts/data_acquisition_scripts && pipenv run python create_campaigns_for_all_campaigns_datasets.py
+cd $ULANMEDIA2APP/scripts/data_acquisition_scripts && pipenv run python add_yesterday_in_days_for_one_campaign_dataset.py
+cd $ULANMEDIA2APP/scripts/data_acquisition_scripts && pipenv run python create_p_and_c_widgets_for_one_campaign_datasets.py
+cd $ULANMEDIA2APP/scripts/data_acquisition_scripts && pipenv run python create_complete_p_widgets_dataset.py
+cd $ULANMEDIA2APP/scripts/data_acquisition_scripts && pipenv run python create_complete_c_widgets_dataset.py
+cd $ULANMEDIA2APP/scripts/data_acquisition_scripts && pipenv run python create_ads_datasets.py
+cd $ULANMEDIA2APP/scripts/data_acquisition_scripts && pipenv run python create_complete_ads_datasets.py
+cd $ULANMEDIA2APP/scripts/data_acquisition_scripts && pipenv run python create_active_flow_rules_list.py
+cd $ULANMEDIA2APP/scripts/data_acquisition_scripts && pipenv run python create_offers_for_each_campaign_datasets.py
+cd $ULANMEDIA2APP/scripts/data_acquisition_scripts && pipenv run python create_offers_for_each_flow_rule_datasets.py
+cd $ULANMEDIA2APP/scripts/data_acquisition_scripts && pipenv run python create_countries_dataset.py
+cd $ULANMEDIA2APP/scripts/data_acquisition_scripts && pipenv run python create_complete_countries_dataset.py
+cd $ULANMEDIA2APP/scripts/data_acquisition_scripts && pipenv run python create_languages_dataset.py
+cd $ULANMEDIA2APP/scripts/data_acquisition_scripts && pipenv run python create_complete_languages_dataset.py
+

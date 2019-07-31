@@ -1,0 +1,11 @@
+from config.config import *
+from config.mgid_token import mgid_token
+from functions.data_acquisition_functions.get_mgid_access_token import get_mgid_access_token
+from functions.data_acquisition_functions.get_vol_access_token import get_vol_access_token
+from functions.data_acquisition_functions.add_yesterday_in_days_for_one_campaign_dataset import add_yesterday_in_days_for_one_campaign_dataset
+
+vol_token = get_vol_access_token(vol_access_id, vol_access_key)
+
+add_yesterday_in_days_for_one_campaign_dataset(vol_token, mgid_token)
+
+
