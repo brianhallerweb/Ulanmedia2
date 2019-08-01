@@ -95,10 +95,11 @@ from functions.data_analysis_functions.create_days_for_one_campaign_report impor
 
 from dashboard.server.json_server.db import db
 from dashboard.server.json_server.resources.colorlist import Colorlist, CompleteColorlist
+from dashboard.server.json_server.resources.good_widget import GoodWidget, CompleteGoodWidgets
 
 
 app = Flask(__name__)
-app.config["SQLALCHEMY_DATABASE_URI"] = "mysql+pymysql://ulan:missoula1@localhost/ulanmedia"
+app.config["SQLALCHEMY_DATABASE_URI"] = "mysql+pymysql://bsh:kensington@localhost/ulanmedia"
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 api = Api(app)
 db.init_app(app)
@@ -109,6 +110,9 @@ def create_tables():
 
 api.add_resource(Colorlist, '/jsonapi/colorlist/<string:color>')
 api.add_resource(CompleteColorlist, '/jsonapi/completecolorlist/<string:color>')
+
+api.add_resource(GoodWidget, '/jsonapi/goodwidget')
+api.add_resource(CompleteGoodWidgets, '/jsonapi/completegoodwidgets')
 
 #####################################
 # campaigns for all campaigns

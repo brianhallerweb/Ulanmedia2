@@ -5,6 +5,7 @@ import PrivateRoute from './PrivateRoute.js';
 import Login from '../components/Login.js';
 import GprsForEachPOffer from '../components/GprsForEachPOffer.js';
 import manage_colorlistHome from '../components/manage_colorlist/Home';
+import good_widgetsHome from '../components/good_widgets/Home';
 import campaigns_for_all_campaignsHome from '../components/campaigns_for_all_campaigns/Home';
 import campaigns_for_good_p_widgetsHome from '../components/campaigns_for_good_p_widgets/Home';
 import countries_for_all_campaignsHome from '../components/countries_for_all_campaigns/Home';
@@ -65,6 +66,10 @@ const AppRouter = () => (
         <PrivateRoute
           path="/managecolorlist/:color"
           Component={manage_colorlistHome}
+        />
+        <PrivateRoute
+          path="/goodwidgets"
+          Component={good_widgetsHome}
         />
         <PrivateRoute
           path="/pwidgetsforonedomainforallcampaigns/:domain"
