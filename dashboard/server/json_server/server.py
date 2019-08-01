@@ -99,6 +99,7 @@ from dashboard.server.json_server.resources.good_widget import GoodWidget, Compl
 
 
 app = Flask(__name__)
+# app.config["SQLALCHEMY_DATABASE_URI"] = "mysql+pymysql://ulan:missoula1@localhost/ulanmedia"
 app.config["SQLALCHEMY_DATABASE_URI"] = "mysql+pymysql://bsh:kensington@localhost/ulanmedia"
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 api = Api(app)
