@@ -15,7 +15,7 @@ class Colorlist(Resource):
         if existing_widget:
             existing_color = existing_widget.color
             if existing_color == color:
-                return {'message': f'widget {widget_id} already in {color}list'}, 400
+                return {'error message': f'widget {widget_id} already in {color}list'}, 400
             switch_flag = True
             existing_widget.delete_from_db()
 
@@ -24,12 +24,12 @@ class Colorlist(Resource):
         try:
             new_widget.save_to_db()
         except:
-            return {'message': f'error {color}listing widget {widget_id}'}, 500
+            return {'error message': f'error {color}listing widget {widget_id}'}, 500
 
         if switch_flag:
-            return {'message': f'widget {widget_id} successfully switched from the {existing_color}list to the {color}list'}, 201
+            return {'success message': f'widget {widget_id} successfully switched from the {existing_color}list to the {color}list'}, 201
         else:
-            return {'message': f'widget {widget_id} successfully added to the {color}list'}, 201
+            return {'success message': f'widget {widget_id} successfully added to the {color}list'}, 201
 
 
     def delete(self, color):
@@ -37,10 +37,14 @@ class Colorlist(Resource):
 
         widget_to_be_deleted = ColorlistModel.find_by_widget_id(widget_id)
         if widget_to_be_deleted:
-           widget_to_be_deleted.delete_from_db()
-           return {'message': f'widget {widget_id} deleted'}
+            try:
+                widget_to_be_deleted.delete_from_db()
+                return {'success message': f'deleted widget {widget_id}'}
+            except:
+                return {'error message': f'error deleting widget {widget_id}'}, 500
+
         else:
-            return {'message': f'widget {widget_id} does not exist in any list'}, 400 
+            return {'error message': f'widget {widget_id} does not exist in any list'}, 400 
 
 
 class CompleteColorlist(Resource):

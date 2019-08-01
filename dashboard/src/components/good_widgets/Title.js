@@ -3,9 +3,9 @@ import React from 'react';
 import {Helmet} from 'react-helmet';
 
 const Title = () => {
-  const title = `Complete good widgets list`;
+  const title = `Good widgets`;
   return (
-    <div className="title">
+    <div style={{marginTop: 30, marginBottom: 40}}>
       <Helmet>
         <meta charSet="utf-8" />
         <title>{title}</title>

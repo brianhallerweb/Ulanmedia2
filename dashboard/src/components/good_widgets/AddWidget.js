@@ -4,19 +4,14 @@ class AddWidget extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      error: undefined
     };
   }
 
   handleAdd(e) {
     e.preventDefault();
     const widget = e.target.elements.newWidget.value.trim();
-    const error = this.props.handleAdd(widget);
-    this.setState(() => ({ error }));
-
-    if (!this.error) {
-      e.target.elements.newWidget.value = "";
-    }
+    this.props.handleAdd(widget);
+    e.target.elements.newWidget.value = "";
   }
 
   render() {
@@ -27,7 +22,7 @@ class AddWidget extends Component {
         )}
         <form className="add-widget" onSubmit={this.handleAdd.bind(this)}>
           <input className="add-widget__input" type="text" name="newWidget" />
-          <button className="button">Add new widget</button>
+          <button className="button">Add widgets</button>
         </form>
       </div>
     );

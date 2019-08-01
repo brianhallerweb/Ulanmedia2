@@ -96,6 +96,7 @@ from functions.data_analysis_functions.create_days_for_one_campaign_report impor
 from dashboard.server.json_server.db import db
 from dashboard.server.json_server.resources.colorlist import Colorlist, CompleteColorlist
 from dashboard.server.json_server.resources.good_widget import GoodWidget, CompleteGoodWidgets
+from dashboard.server.json_server.resources.campaign_set import CampaignSet, CompleteCampaignSets
 
 
 app = Flask(__name__)
@@ -109,11 +110,14 @@ db.init_app(app)
 def create_tables():
     db.create_all()
 
-api.add_resource(Colorlist, '/jsonapi/colorlist/<string:color>')
-api.add_resource(CompleteColorlist, '/jsonapi/completecolorlist/<string:color>')
+api.add_resource(Colorlist, '/jsonapi/<string:color>list')
+api.add_resource(CompleteColorlist, '/jsonapi/complete<string:color>list')
 
 api.add_resource(GoodWidget, '/jsonapi/goodwidget')
 api.add_resource(CompleteGoodWidgets, '/jsonapi/completegoodwidgets')
+
+api.add_resource(CampaignSet, '/jsonapi/campaignset')
+api.add_resource(CompleteCampaignSets, '/jsonapi/completecampaignsets')
 
 #####################################
 # campaigns for all campaigns

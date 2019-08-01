@@ -3,12 +3,12 @@ import React from 'react';
 
 const Widget = ({widgetID, handleDelete}) => {
   return (
-    <div>
-      <p>
-        {widgetID + ' '}
-        <button onClick={() => handleDelete(widgetID)}>X</button>
-      </p>
-    </div>
+    <tr key={widgetID}>
+      <td>{widgetID}</td>
+      <td>
+        <button onClick={() => handleDelete(widgetID)}>Remove</button>
+      </td>
+    </tr>
   );
 };
 

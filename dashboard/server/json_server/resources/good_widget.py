@@ -11,7 +11,7 @@ class GoodWidget(Resource):
 
         existing_widget = GoodWidgetModel.find_by_widget_id(widget_id)
         if existing_widget:
-            return {'error message': f'widget {widget_id} already in list'}, 400
+            return {'error message': f'widget {widget_id} is already in the list'}, 400
 
         new_widget = GoodWidgetModel(widget_id)
 
@@ -35,7 +35,7 @@ class GoodWidget(Resource):
            except:
                return {'error message': f'error deleting widget {widget_id}'}, 500
         else:
-            return {'error message': f'widget {widget_id} does not exist in list'}, 400 
+            return {'error message': f'widget {widget_id} does not exist in the list'}, 400 
 
 
 class CompleteGoodWidgets(Resource):

@@ -4,8 +4,14 @@ import Widget from './Widget';
 
 const Widgets = ({widgets, handleDelete}) => {
   return (
-    <div>
-      <div>
+    <table style={{marginTop: 30, width: '50%'}}>
+      <thead>
+        <tr>
+          <th>Widget ID</th>
+          <th />
+        </tr>
+      </thead>
+      <tbody>
         {widgets.map(widget => (
           <Widget
             key={widget.widget_id}
@@ -13,8 +19,8 @@ const Widgets = ({widgets, handleDelete}) => {
             handleDelete={handleDelete}
           />
         ))}
-      </div>
-    </div>
+      </tbody>
+    </table>
   );
 };
 

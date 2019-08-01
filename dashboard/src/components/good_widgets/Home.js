@@ -104,16 +104,21 @@ class Home extends Component {
   render() {
     return (
       <div>
+        {!this.state.authenticated && <Redirect to="/" />}
         <Title />
         {this.state.successes.length > 0 &&
           this.state.successes.map(success => (
-            <div style={{maginTop: 5, color: 'green'}} key={success}>
+            <div
+              style={{marginTop: 5, marginBottom: 15, color: 'green'}}
+              key={success}>
               {success}
             </div>
           ))}
         {this.state.errors.length > 0 &&
           this.state.errors.map(error => (
-            <div style={{marginTop: 5, color: 'red'}} key={error}>
+            <div
+              style={{marginTop: 5, marginBottom: 15, color: 'red'}}
+              key={error}>
               {error}
             </div>
           ))}
