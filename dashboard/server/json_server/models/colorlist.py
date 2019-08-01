@@ -5,7 +5,7 @@ class ColorlistModel(db.Model):
 
     __tablename__ = 'colorlist'
     id = db.Column(db.Integer, primary_key=True)
-    date_time = db.Column(db.DateTime, default=datetime.datetime.now)
+    color_date = db.Column(db.DateTime, default=datetime.datetime.now)
     widget_id = db.Column(db.String(50), unique=True)
     color = db.Column(db.String(20))
 
