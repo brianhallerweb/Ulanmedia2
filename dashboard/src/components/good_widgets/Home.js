@@ -12,6 +12,8 @@ class Home extends Component {
     this.state = {
       widgets: [],
       authenticated: true,
+      successes: [],
+      errors: [],
     };
   }
 
@@ -19,12 +21,18 @@ class Home extends Component {
     fetch(`/jsonapi/completegoodwidgets`)
       .then(res => res.json())
       .then(widgets => {
-        this.setState({widgets: widgets['good list']});
+        this.setState({widgets: widgets['good widgets']});
       });
   }
 
   handleAdd(widget) {
-    if (!widget) return 'Enter a valid widget';
+    const successes = [];
+    const errors = [];
+
+    if (!widget) {
+      errors.push('no widget entered');
+      return this.setState({successes, errors});
+    }
 
     const widgets = widget.split(',');
     for (let widget of widgets) {
@@ -39,16 +47,34 @@ class Home extends Component {
             widget_id: widget,
           }),
         })
+          .then(res => res.json())
+          .then(res => {
+            if (res['success message']) {
+              successes.push(res['success message']);
+            }
+
+            if (res['error message']) {
+              errors.push(res['error message']);
+            }
+          })
           .then(() => fetch(`/jsonapi/completegoodwidgets`))
           .then(res => res.json())
           .then(widgets => {
-            this.setState({widgets: widgets['good list']});
-          });
+            this.setState({
+              widgets: widgets['good widgets'],
+              successes,
+              errors,
+            });
+          })
+          .catch(err => console.log(err));
       }
     }
   }
 
   handleDelete(widget) {
+    const successes = [];
+    const errors = [];
+
     fetch(`/jsonapi/goodwidget`, {
       method: 'DELETE',
       headers: {
@@ -58,10 +84,20 @@ class Home extends Component {
         widget_id: widget,
       }),
     })
+      .then(res => res.json())
+      .then(res => {
+        if (res['success message']) {
+          successes.push(res['success message']);
+        }
+
+        if (res['error message']) {
+          errors.push(res['error message']);
+        }
+      })
       .then(() => fetch(`/jsonapi/completegoodwidgets`))
       .then(res => res.json())
       .then(widgets => {
-        this.setState({widgets: widgets['good list']});
+        this.setState({widgets: widgets['good widgets'], successes, errors});
       });
   }
 
@@ -69,6 +105,18 @@ class Home extends Component {
     return (
       <div>
         <Title />
+        {this.state.successes.length > 0 &&
+          this.state.successes.map(success => (
+            <div style={{maginTop: 5, color: 'green'}} key={success}>
+              {success}
+            </div>
+          ))}
+        {this.state.errors.length > 0 &&
+          this.state.errors.map(error => (
+            <div style={{marginTop: 5, color: 'red'}} key={error}>
+              {error}
+            </div>
+          ))}
         <AddWidget handleAdd={this.handleAdd.bind(this)} />
         <Widgets
           widgets={this.state.widgets}
