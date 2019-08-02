@@ -29,7 +29,7 @@ class CampaignSet(Resource):
 
 
     def delete(self):
-        vol_id = request.json['widget_id']
+        vol_id = request.json['vol_id']
 
         campaign_set_to_be_deleted = CampaignSetModel.find_by_vol_id(vol_id)
         if campaign_set_to_be_deleted:
@@ -38,6 +38,26 @@ class CampaignSet(Resource):
                return {'success message': f'deleted campaign set with vol id {vol_id}'}
            except:
                return {'error message': f'error deleting campaign set with vol id {vol_id}'}, 500
+        else:
+            return {'error message': f'campaign set with vol id {vol_id} does not exist in the list'}, 400 
+
+    def put(self):
+        vol_id = request.json['vol_id']
+        mgid_id = request.json['mgid_id']
+        name = request.json['name']
+        mpl = request.json['mpl']
+        mps = request.json['mps']
+
+        campaign_set_to_be_updated = CampaignSetModel.find_by_vol_id(vol_id)
+        if campaign_set_to_be_updated:
+           try:
+               campaign_set_to_be_updated.name = name
+               campaign_set_to_be_updated.mpl = mpl
+               campaign_set_to_be_updated.mps = mps
+               campaign_set_to_be_updated.save_to_db()
+               return {'success message': f'updated campaign set with vol id {vol_id}'}
+           except:
+               return {'error message': f'error updating campaign set with vol id {vol_id}'}, 500
         else:
             return {'error message': f'campaign set with vol id {vol_id} does not exist in the list'}, 400 
 
