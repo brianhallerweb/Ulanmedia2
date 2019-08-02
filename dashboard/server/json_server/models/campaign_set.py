@@ -9,8 +9,8 @@ class CampaignSetModel(db.Model):
     vol_id = db.Column(db.String(80), unique=True)
     mgid_id = db.Column(db.String(80), unique=True)
     name = db.Column(db.String(80))
-    mpl = db.Column(db.Numeric)
-    mps = db.Column(db.Numeric)
+    mpl = db.Column(db.Numeric(10,2))
+    mps = db.Column(db.Numeric(10,2))
 
     def __init__(self, vol_id, mgid_id, name, mpl, mps):
         self.vol_id = vol_id
