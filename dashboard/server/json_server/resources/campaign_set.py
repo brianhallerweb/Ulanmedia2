@@ -7,59 +7,58 @@ from models.campaign_set import CampaignSetModel
 class CampaignSet(Resource):
 
     def post(self):
-        vol_id = request.json['vol_id']
-        mgid_id = request.json['mgid_id']
-        name = request.json['name']
-        mpl = request.json['mpl']
-        mps = request.json['mps']
+        vol_campaign_id = request.json['vol_campaign_id']
+        mgid_campaign_id = request.json['mgid_campaign_id']
+        campaign_name = request.json['campaign_name']
+        max_lead_cpa = request.json['max_lead_cpa']
+        max_sale_cpa = request.json['max_sale_cpa']
 
-        existing_campaign_set = CampaignSetModel.find_by_vol_id(vol_id)
+        existing_campaign_set = CampaignSetModel.find_by_vol_campaign_id(vol_campaign_id)
         if existing_campaign_set:
-            return {'error message': f'campaign set with vol id {vol_id} is already in the list'}, 400
+            return {'error message': f'campaign set with vol id {vol_campaign_id} is already in the list'}, 400
 
-        new_campaign_set = CampaignSetModel(vol_id, mgid_id, name, mpl, mps)
+        new_campaign_set = CampaignSetModel(vol_campaign_id, mgid_campaign_id,
+                campaign_name, max_lead_cpa, max_sale_cpa)
 
         try:
             new_campaign_set.save_to_db()
-            return {'success message': f'added campaign set with vol id {vol_id}'} 
+            return {'success message': f'added campaign set with vol id {vol_campaign_id}'} 
         except:
-            return {'error message': f'error adding campaign set with vol id {vol_id}'}, 500
-
-
+            return {'error message': f'error adding campaign set with vol id {vol_campaign_id}'}, 500
 
 
     def delete(self):
-        vol_id = request.json['vol_id']
+        vol_campaign_id = request.json['vol_campaign_id']
 
-        campaign_set_to_be_deleted = CampaignSetModel.find_by_vol_id(vol_id)
+        campaign_set_to_be_deleted = CampaignSetModel.find_by_vol_campaign_id(vol_campaign_id)
         if campaign_set_to_be_deleted:
            try:
                campaign_set_to_be_deleted.delete_from_db()
-               return {'success message': f'deleted campaign set with vol id {vol_id}'}
+               return {'success message': f'deleted campaign set with vol id {vol_campaign_id}'}
            except:
-               return {'error message': f'error deleting campaign set with vol id {vol_id}'}, 500
+               return {'error message': f'error deleting campaign set with vol id {vol_campaign_id}'}, 500
         else:
-            return {'error message': f'campaign set with vol id {vol_id} does not exist in the list'}, 400 
+            return {'error message': f'campaign set with vol id {vol_campaign_id} does not exist in the list'}, 400 
 
     def put(self):
-        vol_id = request.json['vol_id']
-        mgid_id = request.json['mgid_id']
-        name = request.json['name']
-        mpl = request.json['mpl']
-        mps = request.json['mps']
+        vol_campaign_id = request.json['vol_campaign_id']
+        mgid_campaign_id = request.json['mgid_campaign_id']
+        campaign_name = request.json['campaign_name']
+        max_lead_cpa = request.json['max_lead_cpa']
+        max_sale_cpa = request.json['max_sale_cpa']
 
-        campaign_set_to_be_updated = CampaignSetModel.find_by_vol_id(vol_id)
+        campaign_set_to_be_updated = CampaignSetModel.find_by_vol_campaign_id(vol_campaign_id)
         if campaign_set_to_be_updated:
            try:
-               campaign_set_to_be_updated.name = name
-               campaign_set_to_be_updated.mpl = mpl
-               campaign_set_to_be_updated.mps = mps
+               campaign_set_to_be_updated.campaign_name = campaign_name
+               campaign_set_to_be_updated.max_lead_cpa = max_lead_cpa
+               campaign_set_to_be_updated.max_sale_cpa = max_sale_cpa
                campaign_set_to_be_updated.save_to_db()
-               return {'success message': f'updated campaign set with vol id {vol_id}'}
+               return {'success message': f'updated campaign set with vol id {vol_campaign_id}'}
            except:
-               return {'error message': f'error updating campaign set with vol id {vol_id}'}, 500
+               return {'error message': f'error updating campaign set with vol id {vol_campaign_id}'}, 500
         else:
-            return {'error message': f'campaign set with vol id {vol_id} does not exist in the list'}, 400 
+            return {'error message': f'campaign set with vol id {vol_campaign_id} does not exist in the list'}, 400 
 
 
 class CompleteCampaignSets(Resource):
