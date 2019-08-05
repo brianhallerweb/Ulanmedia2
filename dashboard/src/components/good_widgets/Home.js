@@ -18,7 +18,12 @@ class Home extends Component {
   }
 
   componentDidMount() {
-    fetch(`/jsonapi/completegoodwidgets`)
+    fetch(`/jsonapi/completegoodwidgets`, {
+      method: 'GET',
+      headers: {
+        Authorization: `JWT ${localStorage.getItem('token')}`,
+      },
+    })
       .then(res => res.json())
       .then(widgets => {
         this.setState({widgets: widgets['good widgets']});
@@ -42,6 +47,7 @@ class Home extends Component {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
+            Authorization: `JWT ${localStorage.getItem('token')}`,
           },
           body: JSON.stringify({
             widget_id: widget,
@@ -57,7 +63,14 @@ class Home extends Component {
               errors.push(res['error message']);
             }
           })
-          .then(() => fetch(`/jsonapi/completegoodwidgets`))
+          .then(() =>
+            fetch(`/jsonapi/completegoodwidgets`, {
+              method: 'GET',
+              headers: {
+                Authorization: `JWT ${localStorage.getItem('token')}`,
+              },
+            }),
+          )
           .then(res => res.json())
           .then(widgets => {
             this.setState({
@@ -79,6 +92,7 @@ class Home extends Component {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
+        Authorization: `JWT ${localStorage.getItem('token')}`,
       },
       body: JSON.stringify({
         widget_id: widget,
@@ -94,7 +108,14 @@ class Home extends Component {
           errors.push(res['error message']);
         }
       })
-      .then(() => fetch(`/jsonapi/completegoodwidgets`))
+      .then(() =>
+        fetch(`/jsonapi/completegoodwidgets`, {
+          method: 'GET',
+          headers: {
+            Authorization: `JWT ${localStorage.getItem('token')}`,
+          },
+        }),
+      )
       .then(res => res.json())
       .then(widgets => {
         this.setState({widgets: widgets['good widgets'], successes, errors});

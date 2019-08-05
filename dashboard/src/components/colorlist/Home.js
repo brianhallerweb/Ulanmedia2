@@ -19,7 +19,12 @@ class Home extends Component {
   }
 
   componentDidMount() {
-    fetch(`/jsonapi/complete${this.state.color}list`)
+    fetch(`/jsonapi/complete${this.state.color}list`, {
+      method: 'GET',
+      headers: {
+        Authorization: `JWT ${localStorage.getItem('token')}`,
+      },
+    })
       .then(res => res.json())
       .then(list => {
         this.setState({widgets: list[`${this.state.color}list`]});
@@ -43,6 +48,7 @@ class Home extends Component {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
+            Authorization: `JWT ${localStorage.getItem('token')}`,
           },
           body: JSON.stringify({
             widget_id: widget,
@@ -57,7 +63,14 @@ class Home extends Component {
               errors.push(res['error message']);
             }
           })
-          .then(() => fetch(`/jsonapi/complete${this.state.color}list`))
+          .then(() =>
+            fetch(`/jsonapi/complete${this.state.color}list`, {
+              method: 'GET',
+              headers: {
+                Authorization: `JWT ${localStorage.getItem('token')}`,
+              },
+            }),
+          )
           .then(res => res.json())
           .then(list => {
             this.setState({
@@ -78,6 +91,7 @@ class Home extends Component {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
+        Authorization: `JWT ${localStorage.getItem('token')}`,
       },
       body: JSON.stringify({
         widget_id: widget,
@@ -93,7 +107,14 @@ class Home extends Component {
           errors.push(res['error message']);
         }
       })
-      .then(() => fetch(`/jsonapi/complete${this.state.color}list`))
+      .then(() =>
+        fetch(`/jsonapi/complete${this.state.color}list`, {
+          method: 'GET',
+          headers: {
+            Authorization: `JWT ${localStorage.getItem('token')}`,
+          },
+        }),
+      )
       .then(res => res.json())
       .then(list => {
         this.setState({

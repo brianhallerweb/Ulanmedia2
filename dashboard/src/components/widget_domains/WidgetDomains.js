@@ -16,7 +16,7 @@ const WidgetDomains = ({widgetDomains, handleDelete}) => {
       <tbody>
         {widgetDomains.map(widgetDomain => (
           <WidgetDomain
-            key={widgetDomain.widget_id}
+            key={widgetDomain.id}
             trafficSource={widgetDomain.traffic_source}
             widgetID={widgetDomain.widget_id}
             domain={widgetDomain.domain}

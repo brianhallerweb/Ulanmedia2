@@ -4,6 +4,9 @@ from flask_restful import Api
 from flask_jwt import JWT
 import os
 from config.config import *
+
+from security import authenticate, identity
+
 from functions.data_acquisition_functions.get_vol_access_token import get_vol_access_token
 from functions.misc.create_vol_date_range import create_vol_date_range
 
@@ -104,12 +107,21 @@ app = Flask(__name__)
 # app.config["SQLALCHEMY_DATABASE_URI"] = "mysql+pymysql://ulan:missoula1@localhost/ulanmedia"
 app.config["SQLALCHEMY_DATABASE_URI"] = "mysql+pymysql://bsh:kensington@localhost/ulanmedia"
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+# app.secret_key = "obie"
+app.secret_key = flask_secret_key
 api = Api(app)
 db.init_app(app)
 
 @app.before_first_request
 def create_tables():
     db.create_all()
+
+# the client sends username and password to /login
+# /login runs the authenticate function, which checks username and password in
+# the db and then returns a jwt
+# /login requires a POST with username and password in a json body
+app.config['JWT_AUTH_URL_RULE'] = '/jsonapi/login'
+jwt = JWT(app, authenticate, identity)
 
 api.add_resource(Colorlist, '/jsonapi/<string:color>list')
 api.add_resource(CompleteColorlist, '/jsonapi/complete<string:color>list')

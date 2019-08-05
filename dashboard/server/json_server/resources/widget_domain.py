@@ -6,6 +6,7 @@ from models.widget_domain import WidgetDomainModel
 
 class WidgetDomain(Resource):
 
+    @jwt_required()
     def post(self):
         traffic_source = request.json['traffic_source']
         widget_id = request.json['widget_id']
@@ -24,6 +25,7 @@ class WidgetDomain(Resource):
             return {'error message': f'error adding widget {traffic_source},{widget_id},{domain}'}, 500
 
 
+    @jwt_required()
     def delete(self):
         traffic_source = request.json['traffic_source']
         widget_id = request.json['widget_id']
@@ -42,6 +44,7 @@ class WidgetDomain(Resource):
 
 class CompleteWidgetDomains(Resource):
     
+    @jwt_required()
     def get(self):
         return {f'widget domains': [widget_domain.json() for widget_domain in
             WidgetDomainModel.query.order_by(WidgetDomainModel.traffic_source,

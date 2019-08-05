@@ -5,7 +5,7 @@ class WidgetDomainModel(db.Model):
 
     __tablename__ = 'widget_domains'
     id = db.Column(db.Integer, primary_key=True)
-    widget_domains_date = db.Column(db.DateTime, default=datetime.datetime.now)
+    widget_domain_date = db.Column(db.DateTime, default=datetime.datetime.now)
     traffic_source = db.Column(db.String(50))
     widget_id = db.Column(db.String(50))
     domain = db.Column(db.String(50))
@@ -16,7 +16,7 @@ class WidgetDomainModel(db.Model):
         self.domain = domain
 
     def json(self):
-        return {'traffic_source': self.traffic_source, 'widget_id': self.widget_id, 'domain': self.domain}
+        return {'id': self.id, 'traffic_source': self.traffic_source, 'widget_id': self.widget_id, 'domain': self.domain}
 
     @classmethod
     def find_widget_domain(cls, traffic_source, widget_id, domain):

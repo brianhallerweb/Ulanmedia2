@@ -18,7 +18,12 @@ class Home extends Component {
   }
 
   componentDidMount() {
-    fetch(`/jsonapi/completewidgetdomains`)
+    fetch(`/jsonapi/completewidgetdomains`, {
+      method: 'GET',
+      headers: {
+        Authorization: `JWT ${localStorage.getItem('token')}`,
+      },
+    })
       .then(res => res.json())
       .then(widgetDomains => {
         this.setState({widgetDomains: widgetDomains['widget domains']});
@@ -52,6 +57,7 @@ class Home extends Component {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          Authorization: `JWT ${localStorage.getItem('token')}`,
         },
         body: JSON.stringify({
           traffic_source: trafficSource,
@@ -69,7 +75,14 @@ class Home extends Component {
             errors.push(res['error message']);
           }
         })
-        .then(() => fetch(`/jsonapi/completewidgetdomains`))
+        .then(() =>
+          fetch(`/jsonapi/completewidgetdomains`, {
+            method: 'GET',
+            headers: {
+              Authorization: `JWT ${localStorage.getItem('token')}`,
+            },
+          }),
+        )
         .then(res => res.json())
         .then(widgetDomains => {
           this.setState({
@@ -90,6 +103,7 @@ class Home extends Component {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
+        Authorization: `JWT ${localStorage.getItem('token')}`,
       },
       body: JSON.stringify({
         traffic_source: trafficSource,
@@ -107,7 +121,14 @@ class Home extends Component {
           errors.push(res['error message']);
         }
       })
-      .then(() => fetch(`/jsonapi/completewidgetdomains`))
+      .then(() =>
+        fetch(`/jsonapi/completewidgetdomains`, {
+          method: 'GET',
+          headers: {
+            Authorization: `JWT ${localStorage.getItem('token')}`,
+          },
+        }),
+      )
       .then(res => res.json())
       .then(widgetDomains => {
         this.setState({

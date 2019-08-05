@@ -6,6 +6,7 @@ from models.good_widget import GoodWidgetModel
 
 class GoodWidget(Resource):
 
+    @jwt_required()
     def post(self):
         widget_id = request.json['widget_id']
 
@@ -24,6 +25,7 @@ class GoodWidget(Resource):
 
 
 
+    @jwt_required()
     def delete(self):
         widget_id = request.json['widget_id']
 
@@ -40,6 +42,7 @@ class GoodWidget(Resource):
 
 class CompleteGoodWidgets(Resource):
     
+    @jwt_required()
     def get(self):
         return {f'good widgets': [good_widget.json() for good_widget in
             GoodWidgetModel.query.all()]}

@@ -6,7 +6,7 @@ class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      email: '',
+      username: '',
       password: '',
       error: false,
       tokenAcquired: false,
@@ -14,15 +14,15 @@ class Login extends Component {
   }
 
   submitForm() {
-    const email = this.state.email.trim();
+    const username = this.state.username.trim();
     const password = this.state.password.trim();
-    fetch('/api/users/login', {
+    fetch('/jsonapi/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        email,
+        username,
         password,
       }),
     })
@@ -31,10 +31,10 @@ class Login extends Component {
           this.setState({error: true, password: ''});
           throw Error(res.statusText);
         }
-        return res;
+        return res.json();
       })
       .then(res => {
-        localStorage.setItem('token', res.headers.get('x-auth'));
+        localStorage.setItem('token', res.access_token);
         this.setState({tokenAcquired: true});
       })
       .catch(err => console.log(err));
@@ -43,7 +43,7 @@ class Login extends Component {
   render() {
     return (
       <div style={{margin: 40}}>
-        <h3 style={{paddingLeft: 5}}>Ulan Media Dashboard</h3>
+        <h3 style={{paddingLeft: 5}}>Ulan Media 2 Dashboard</h3>
         <form
           onSubmit={e => {
             e.preventDefault();
@@ -52,10 +52,10 @@ class Login extends Component {
           <div style={{padding: 5}}>
             <input
               type="text"
-              placeholder="email"
-              value={this.state.email}
+              placeholder="username"
+              value={this.state.username}
               onChange={e => {
-                this.setState({email: e.target.value});
+                this.setState({username: e.target.value});
               }}
             />
           </div>

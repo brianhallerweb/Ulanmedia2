@@ -6,6 +6,7 @@ from models.campaign_set import CampaignSetModel
 
 class CampaignSet(Resource):
 
+    @jwt_required()
     def post(self):
         vol_campaign_id = request.json['vol_campaign_id']
         mgid_campaign_id = request.json['mgid_campaign_id']
@@ -27,7 +28,7 @@ class CampaignSet(Resource):
         except:
             return {'error message': f'error adding campaign set with vol id {vol_campaign_id}'}, 500
 
-
+    @jwt_required()
     def delete(self):
         vol_campaign_id = request.json['vol_campaign_id']
 
@@ -41,6 +42,7 @@ class CampaignSet(Resource):
         else:
             return {'error message': f'campaign set with vol id {vol_campaign_id} does not exist in the list'}, 400 
 
+    @jwt_required()
     def put(self):
         vol_campaign_id = request.json['vol_campaign_id']
         mgid_campaign_id = request.json['mgid_campaign_id']
@@ -65,7 +67,8 @@ class CampaignSet(Resource):
 
 
 class CompleteCampaignSets(Resource):
-    
+
+    @jwt_required()
     def get(self):
         return {f'campaign sets': [campaign_set.json() for campaign_set in
             CampaignSetModel.query.all()]}

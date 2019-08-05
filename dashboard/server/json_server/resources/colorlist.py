@@ -6,6 +6,7 @@ from models.colorlist import ColorlistModel
 
 class Colorlist(Resource):
 
+    @jwt_required()
     def post(self, color):
         widget_id = request.json['widget_id']
 
@@ -32,6 +33,7 @@ class Colorlist(Resource):
             return {'success message': f'widget {widget_id} successfully added to the {color}list'}, 201
 
 
+    @jwt_required()
     def delete(self, color):
         widget_id = request.json['widget_id']
 
@@ -48,7 +50,8 @@ class Colorlist(Resource):
 
 
 class CompleteColorlist(Resource):
-    
+
+    @jwt_required()
     def get(self, color):
         return {f'{color}list': [colorlist.json() for colorlist in
             ColorlistModel.query.filter_by(color=color)]}
