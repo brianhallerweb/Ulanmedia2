@@ -24,6 +24,20 @@ class Home extends Component {
         Authorization: `JWT ${localStorage.getItem('token')}`,
       },
     })
+      .then(res => {
+        if (!res.ok) {
+          if (res.status == 401) {
+            //the case when a token is in the browser but it doesn't
+            //match what it is in the database. This can happen when the
+            //token is manipulated in the browser or if the tokens are
+            //deleted from the database without the user logging out.
+            localStorage.removeItem('token');
+            this.setState({authenticated: false});
+          }
+          throw Error(res.statusText);
+        }
+        return res;
+      })
       .then(res => res.json())
       .then(campaignSets => {
         this.setState({campaignSets: campaignSets['campaign sets']});
@@ -60,6 +74,20 @@ class Home extends Component {
         campaign_status: campaignSet.campaignStatus,
       }),
     })
+      .then(res => {
+        if (!res.ok) {
+          if (res.status == 401) {
+            //the case when a token is in the browser but it doesn't
+            //match what it is in the database. This can happen when the
+            //token is manipulated in the browser or if the tokens are
+            //deleted from the database without the user logging out.
+            localStorage.removeItem('token');
+            this.setState({authenticated: false});
+          }
+          throw Error(res.statusText);
+        }
+        return res;
+      })
       .then(res => res.json())
       .then(res => {
         if (res['success message']) {
@@ -78,6 +106,20 @@ class Home extends Component {
           },
         }),
       )
+      .then(res => {
+        if (!res.ok) {
+          if (res.status == 401) {
+            //the case when a token is in the browser but it doesn't
+            //match what it is in the database. This can happen when the
+            //token is manipulated in the browser or if the tokens are
+            //deleted from the database without the user logging out.
+            localStorage.removeItem('token');
+            this.setState({authenticated: false});
+          }
+          throw Error(res.statusText);
+        }
+        return res;
+      })
       .then(res => res.json())
       .then(campaignSets => {
         this.setState({
@@ -103,6 +145,20 @@ class Home extends Component {
         vol_campaign_id: volCampaignID,
       }),
     })
+      .then(res => {
+        if (!res.ok) {
+          if (res.status == 401) {
+            //the case when a token is in the browser but it doesn't
+            //match what it is in the database. This can happen when the
+            //token is manipulated in the browser or if the tokens are
+            //deleted from the database without the user logging out.
+            localStorage.removeItem('token');
+            this.setState({authenticated: false});
+          }
+          throw Error(res.statusText);
+        }
+        return res;
+      })
       .then(res => res.json())
       .then(res => {
         if (res['success message']) {
@@ -121,6 +177,20 @@ class Home extends Component {
           },
         }),
       )
+      .then(res => {
+        if (!res.ok) {
+          if (res.status == 401) {
+            //the case when a token is in the browser but it doesn't
+            //match what it is in the database. This can happen when the
+            //token is manipulated in the browser or if the tokens are
+            //deleted from the database without the user logging out.
+            localStorage.removeItem('token');
+            this.setState({authenticated: false});
+          }
+          throw Error(res.statusText);
+        }
+        return res;
+      })
       .then(res => res.json())
       .then(campaignSets => {
         this.setState({
@@ -155,6 +225,20 @@ class Home extends Component {
         campaign_status: campaignSet.campaignStatus,
       }),
     })
+      .then(res => {
+        if (!res.ok) {
+          if (res.status == 401) {
+            //the case when a token is in the browser but it doesn't
+            //match what it is in the database. This can happen when the
+            //token is manipulated in the browser or if the tokens are
+            //deleted from the database without the user logging out.
+            localStorage.removeItem('token');
+            this.setState({authenticated: false});
+          }
+          throw Error(res.statusText);
+        }
+        return res;
+      })
       .then(res => res.json())
       .then(res => {
         if (res['success message']) {
@@ -173,6 +257,20 @@ class Home extends Component {
           },
         }),
       )
+      .then(res => {
+        if (!res.ok) {
+          if (res.status == 401) {
+            //the case when a token is in the browser but it doesn't
+            //match what it is in the database. This can happen when the
+            //token is manipulated in the browser or if the tokens are
+            //deleted from the database without the user logging out.
+            localStorage.removeItem('token');
+            this.setState({authenticated: false});
+          }
+          throw Error(res.statusText);
+        }
+        return res;
+      })
       .then(res => res.json())
       .then(campaignSets => {
         this.setState({
