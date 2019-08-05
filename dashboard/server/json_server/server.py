@@ -97,6 +97,7 @@ from dashboard.server.json_server.db import db
 from dashboard.server.json_server.resources.colorlist import Colorlist, CompleteColorlist
 from dashboard.server.json_server.resources.good_widget import GoodWidget, CompleteGoodWidgets
 from dashboard.server.json_server.resources.campaign_set import CampaignSet, CompleteCampaignSets
+from dashboard.server.json_server.resources.widget_domain import WidgetDomain, CompleteWidgetDomains
 
 
 app = Flask(__name__)
@@ -118,6 +119,9 @@ api.add_resource(CompleteGoodWidgets, '/jsonapi/completegoodwidgets')
 
 api.add_resource(CampaignSet, '/jsonapi/campaignset')
 api.add_resource(CompleteCampaignSets, '/jsonapi/completecampaignsets')
+
+api.add_resource(WidgetDomain, '/jsonapi/widgetdomain')
+api.add_resource(CompleteWidgetDomains, '/jsonapi/completewidgetdomains')
 
 #####################################
 # campaigns for all campaigns
