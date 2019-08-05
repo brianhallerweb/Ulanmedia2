@@ -44,7 +44,8 @@ class CompleteWidgetDomains(Resource):
     
     def get(self):
         return {f'widget domains': [widget_domain.json() for widget_domain in
-            WidgetDomainModel.query.all()]}
+            WidgetDomainModel.query.order_by(WidgetDomainModel.traffic_source,
+                WidgetDomainModel.widget_id, WidgetDomainModel.domain).all()]}
         
 
 

@@ -6,9 +6,17 @@ const WidgetDomain = ({trafficSource, widgetID, domain, handleDelete}) => {
     <tr key={widgetID}>
       <td>{trafficSource}</td>
       <td>{widgetID}</td>
-      <td>{domain}</td>
       <td>
-        <button onClick={() => handleDelete(trafficSource, widgetID, domain)}>Remove</button>
+        <a
+          href={`https://refererhider.com/?http://${domain}`}
+          target={'_blank'}>
+          {domain}
+        </a>
+      </td>
+      <td>
+        <button onClick={() => handleDelete(trafficSource, widgetID, domain)}>
+          Remove
+        </button>
       </td>
     </tr>
   );
