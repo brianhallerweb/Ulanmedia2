@@ -113,12 +113,14 @@ class Home extends Component {
           errors.push(res['error message']);
         }
       })
-      .then(() => fetch(`/jsonapi/completecampaignsets`), {
-        method: 'GET',
-        headers: {
-          Authorization: `JWT ${localStorage.getItem('token')}`,
-        },
-      })
+      .then(() =>
+        fetch(`/jsonapi/completecampaignsets`, {
+          method: 'GET',
+          headers: {
+            Authorization: `JWT ${localStorage.getItem('token')}`,
+          },
+        }),
+      )
       .then(res => res.json())
       .then(campaignSets => {
         this.setState({
