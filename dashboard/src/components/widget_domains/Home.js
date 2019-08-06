@@ -34,13 +34,12 @@ class Home extends Component {
             localStorage.removeItem('token');
             this.setState({authenticated: false});
           }
-          let test = res.json();
-          console.log(test);
-          throw Error(res.statusText);
+          //throw Error(res.statusText);
         }
         return res;
       })
       .then(res => res.json())
+      .then(res => console.log(res))
       .then(widgetDomains => {
         this.setState({widgetDomains: widgetDomains['widget domains']});
       });
