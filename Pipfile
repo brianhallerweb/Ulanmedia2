@@ -14,6 +14,7 @@ flask-sqlalchemy = "*"
 pymysql = "*"
 flask-restful = "*"
 flask-jwt = "*"
+uwsgi = "*"
 
 [requires]
 python_version = "3.7"

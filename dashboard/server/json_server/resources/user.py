@@ -1,6 +1,6 @@
 from flask_restful import Resource
 from flask import request
-from models.user import UserModel
+from dashboard.server.json_server.models.user import UserModel
 
 # 8/5/19 I included this code for completeness but there is no route for
 # creating a new user

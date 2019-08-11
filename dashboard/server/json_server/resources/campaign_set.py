@@ -1,7 +1,7 @@
 from flask_restful import Resource
 from flask import request, jsonify
 from flask_jwt import JWT, jwt_required
-from models.campaign_set import CampaignSetModel
+from dashboard.server.json_server.models.campaign_set import CampaignSetModel
 
 
 class CampaignSet(Resource):

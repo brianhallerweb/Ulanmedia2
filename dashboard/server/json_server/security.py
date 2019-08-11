@@ -1,5 +1,5 @@
 from werkzeug.security import safe_str_cmp
-from resources.user import UserModel
+from dashboard.server.json_server.resources.user import UserModel
 
 def authenticate(username, password):
     user = UserModel.find_by_username(username)

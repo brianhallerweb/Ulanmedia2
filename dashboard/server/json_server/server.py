@@ -5,7 +5,7 @@ from flask_jwt import JWT
 import os
 from config.config import *
 
-from security import authenticate, identity
+from dashboard.server.json_server.security import authenticate, identity
 
 from functions.data_acquisition_functions.get_vol_access_token import get_vol_access_token
 from functions.misc.create_vol_date_range import create_vol_date_range

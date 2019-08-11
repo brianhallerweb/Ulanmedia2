@@ -1,7 +1,7 @@
 from flask_restful import Resource
 from flask import request, jsonify
 from flask_jwt import JWT, jwt_required
-from models.widget_domain import WidgetDomainModel
+from dashboard.server.json_server.models.widget_domain import WidgetDomainModel
 
 
 class WidgetDomain(Resource):

@@ -1,7 +1,7 @@
 from flask_restful import Resource
 from flask import request, jsonify
 from flask_jwt import JWT, jwt_required
-from models.good_widget import GoodWidgetModel
+from dashboard.server.json_server.models.good_widget import GoodWidgetModel
 
 
 class GoodWidget(Resource):

@@ -1,7 +1,7 @@
 from flask_restful import Resource
 from flask import request
 from flask_jwt import JWT, jwt_required
-from models.colorlist import ColorlistModel
+from dashboard.server.json_server.models.colorlist import ColorlistModel
 
 
 class Colorlist(Resource):
