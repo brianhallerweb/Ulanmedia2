@@ -104,7 +104,7 @@ from dashboard.server.json_server.resources.widget_domain import WidgetDomain, C
 
 
 app = Flask(__name__)
-app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get('ULANMEDIAMYSQLURL')
+app.config["SQLALCHEMY_DATABASE_URI"] = f"{os.environ.get('ULANMEDIAMYSQLURL')}"
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 app.secret_key = flask_secret_key
 api = Api(app)
