@@ -77,7 +77,7 @@ class Home extends Component {
                 localStorage.removeItem('token');
                 this.setState({authenticated: false});
               }
-              throw Error(res.statusText);
+              //throw Error(res.statusText);
             }
             return res;
           })

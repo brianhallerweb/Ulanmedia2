@@ -12,7 +12,7 @@ class GoodWidget(Resource):
 
         existing_widget = GoodWidgetModel.find_by_widget_id(widget_id)
         if existing_widget:
-            return abort(400, error_message=f'widget {widget_id} is already in the list')
+            return {'error_message': f'widget {widget_id} is already in the list'}, 400
 
         new_widget = GoodWidgetModel(widget_id)
 
