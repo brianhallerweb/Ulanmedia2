@@ -40,7 +40,7 @@ class Home extends Component {
       })
       .then(res => res.json())
       .then(widgets => {
-        this.setState({widgets: widgets['good widgets']});
+        this.setState({widgets: widgets['good_widgets']});
       });
   }
 
@@ -83,12 +83,12 @@ class Home extends Component {
           })
           .then(res => res.json())
           .then(res => {
-            if (res['success message']) {
-              successes.push(res['success message']);
+            if (res['success_message']) {
+              successes.push(res['success_message']);
             }
 
-            if (res['error message']) {
-              errors.push(res['error message']);
+            if (res['error_message']) {
+              errors.push(res['error_message']);
             }
           })
           .then(() =>
@@ -117,7 +117,7 @@ class Home extends Component {
           .then(res => res.json())
           .then(widgets => {
             this.setState({
-              widgets: widgets['good widgets'],
+              widgets: widgets['good_widgets'],
               successes,
               errors,
             });
@@ -157,12 +157,12 @@ class Home extends Component {
       })
       .then(res => res.json())
       .then(res => {
-        if (res['success message']) {
-          successes.push(res['success message']);
+        if (res['success_message']) {
+          successes.push(res['success_message']);
         }
 
-        if (res['error message']) {
-          errors.push(res['error message']);
+        if (res['error_message']) {
+          errors.push(res['error_message']);
         }
       })
       .then(() =>
@@ -190,7 +190,7 @@ class Home extends Component {
 
       .then(res => res.json())
       .then(widgets => {
-        this.setState({widgets: widgets['good widgets'], successes, errors});
+        this.setState({widgets: widgets['good_widgets'], successes, errors});
       });
   }
 
