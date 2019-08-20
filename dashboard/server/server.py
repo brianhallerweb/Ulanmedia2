@@ -7,9 +7,6 @@ from config.config import *
 
 from dashboard.server.security import authenticate, identity
 
-from functions.data_acquisition_functions.get_vol_access_token import get_vol_access_token
-from functions.misc.create_vol_date_range import create_vol_date_range
-
 from dashboard.server.db import db
 from dashboard.server.models.user import RevokedTokenModel
 from dashboard.server.resources.colorlist import Colorlist, CompleteColorlist
