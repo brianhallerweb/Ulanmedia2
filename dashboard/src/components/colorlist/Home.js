@@ -22,20 +22,15 @@ class Home extends Component {
     fetch(`/jsonapi/complete${this.state.color}list`, {
       method: 'GET',
       headers: {
-        Authorization: `JWT ${localStorage.getItem('token')}`,
+        Authorization: `Bearer ${localStorage.getItem('access_token')}`,
       },
     })
       .then(res => {
         if (!res.ok) {
           if (res.status == 401) {
-            //the case when a token is in the browser but it doesn't
-            //match what it is in the database. This can happen when the
-            //token is manipulated in the browser or if the tokens are
-            //deleted from the database without the user logging out.
-            localStorage.removeItem('token');
+            localStorage.removeItem('access_token');
             this.setState({authenticated: false});
           }
-          throw Error(res.statusText);
         }
         return res;
       })
@@ -62,7 +57,7 @@ class Home extends Component {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
-            Authorization: `JWT ${localStorage.getItem('token')}`,
+            Authorization: `Bearer ${localStorage.getItem('access_token')}`,
           },
           body: JSON.stringify({
             widget_id: widget,
@@ -71,45 +66,35 @@ class Home extends Component {
           .then(res => {
             if (!res.ok) {
               if (res.status == 401) {
-                //the case when a token is in the browser but it doesn't
-                //match what it is in the database. This can happen when the
-                //token is manipulated in the browser or if the tokens are
-                //deleted from the database without the user logging out.
-                localStorage.removeItem('token');
+                localStorage.removeItem('access_token');
                 this.setState({authenticated: false});
               }
-              throw Error(res.statusText);
             }
             return res;
           })
           .then(res => res.json())
           .then(res => {
-            if (res['success message']) {
-              successes.push(res['success message']);
+            if (res['success_message']) {
+              successes.push(res['success_message']);
             }
-            if (res['error message']) {
-              errors.push(res['error message']);
+            if (res['error_message']) {
+              errors.push(res['error_message']);
             }
           })
           .then(() =>
             fetch(`/jsonapi/complete${this.state.color}list`, {
               method: 'GET',
               headers: {
-                Authorization: `JWT ${localStorage.getItem('token')}`,
+                Authorization: `Bearer ${localStorage.getItem('access_token')}`,
               },
             }),
           )
           .then(res => {
             if (!res.ok) {
               if (res.status == 401) {
-                //the case when a token is in the browser but it doesn't
-                //match what it is in the database. This can happen when the
-                //token is manipulated in the browser or if the tokens are
-                //deleted from the database without the user logging out.
-                localStorage.removeItem('token');
+                localStorage.removeItem('access_token');
                 this.setState({authenticated: false});
               }
-              throw Error(res.statusText);
             }
             return res;
           })
@@ -133,7 +118,7 @@ class Home extends Component {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `JWT ${localStorage.getItem('token')}`,
+        Authorization: `Bearer ${localStorage.getItem('access_token')}`,
       },
       body: JSON.stringify({
         widget_id: widget,
@@ -142,46 +127,36 @@ class Home extends Component {
       .then(res => {
         if (!res.ok) {
           if (res.status == 401) {
-            //the case when a token is in the browser but it doesn't
-            //match what it is in the database. This can happen when the
-            //token is manipulated in the browser or if the tokens are
-            //deleted from the database without the user logging out.
-            localStorage.removeItem('token');
+            localStorage.removeItem('access_token');
             this.setState({authenticated: false});
           }
-          throw Error(res.statusText);
         }
         return res;
       })
       .then(res => res.json())
       .then(res => {
-        if (res['success message']) {
-          successes.push(res['success message']);
+        if (res['success_message']) {
+          successes.push(res['success_message']);
         }
 
-        if (res['error message']) {
-          errors.push(res['error message']);
+        if (res['error_message']) {
+          errors.push(res['error_message']);
         }
       })
       .then(() =>
         fetch(`/jsonapi/complete${this.state.color}list`, {
           method: 'GET',
           headers: {
-            Authorization: `JWT ${localStorage.getItem('token')}`,
+            Authorization: `Bearer ${localStorage.getItem('access_token')}`,
           },
         }),
       )
       .then(res => {
         if (!res.ok) {
           if (res.status == 401) {
-            //the case when a token is in the browser but it doesn't
-            //match what it is in the database. This can happen when the
-            //token is manipulated in the browser or if the tokens are
-            //deleted from the database without the user logging out.
-            localStorage.removeItem('token');
+            localStorage.removeItem('access_token');
             this.setState({authenticated: false});
           }
-          throw Error(res.statusText);
         }
         return res;
       })

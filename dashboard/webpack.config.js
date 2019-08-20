@@ -4,7 +4,7 @@ const path = require('path');
 module.exports = {
   entry: './src/app.js',
   output: {
-    path: path.join(__dirname, 'public'),
+    path: path.join(__dirname, 'server/static'),
     filename: 'bundle.js',
   },
   module: {
@@ -22,12 +22,8 @@ module.exports = {
   },
   devtool: 'cheap-module-eval-source-map',
   devServer: {
-    contentBase: path.join(__dirname, 'public'),
+    contentBase: path.join(__dirname, 'server/static'),
     proxy: [
-      {
-        context: ['/api/'],
-        target: 'http://localhost:3001',
-      },
       {
         context: ['/jsonapi/'],
         target: 'http://localhost:5001',

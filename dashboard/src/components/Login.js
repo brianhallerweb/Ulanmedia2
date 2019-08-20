@@ -34,7 +34,8 @@ class Login extends Component {
         return res.json();
       })
       .then(res => {
-        localStorage.setItem('token', res.access_token);
+        localStorage.setItem('access_token', res.access_token);
+        localStorage.setItem('refresh_token', res.refresh_token);
         this.setState({tokenAcquired: true});
       })
       .catch(err => console.log(err));

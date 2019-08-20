@@ -13,8 +13,9 @@ flask = "*"
 flask-sqlalchemy = "*"
 pymysql = "*"
 flask-restful = "*"
-flask-jwt = "*"
 uwsgi = "*"
+passlib = "*"
+flask-jwt-extended = "*"
 
 [requires]
 python_version = "3.7"

@@ -3,7 +3,7 @@ import { Redirect } from "react-router-dom";
 
 const RedirectToHome = () => (
   <div>
-    <Redirect to="/campaignsforallcampaigns" />
+    <Redirect to="/" />
   </div>
 );
 
