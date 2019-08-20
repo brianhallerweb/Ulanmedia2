@@ -9,8 +9,38 @@ const GlobalNavBar = () => {
       <InternalLink
         className={'globalNavItem'}
         activeClassName={'is-active'}
+        to={'/colorlist/white'}
+        label={'white'}
+      />
+      <InternalLink
+        className={'globalNavItem'}
+        activeClassName={'is-active'}
+        to={'/colorlist/grey'}
+        label={'grey'}
+      />
+      <InternalLink
+        className={'globalNavItem'}
+        activeClassName={'is-active'}
+        to={'/colorlist/black'}
+        label={'black'}
+      />
+      <InternalLink
+        className={'globalNavItem'}
+        activeClassName={'is-active'}
         to={'/goodwidgets'}
         label={'good widgets'}
+      />
+      <InternalLink
+        className={'globalNavItem'}
+        activeClassName={'is-active'}
+        to={'/campaignsets'}
+        label={'campaign sets'}
+      />
+      <InternalLink
+        className={'globalNavItem'}
+        activeClassName={'is-active'}
+        to={'/widgetdomains'}
+        label={'widget-domains'}
       />
     </div>
   );
