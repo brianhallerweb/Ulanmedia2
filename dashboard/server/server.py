@@ -36,7 +36,7 @@ def check_if_token_in_blacklist(decrypted_token):
     jti = decrypted_token['jti']
     return RevokedTokenModel.is_jti_blacklisted(jti)
 
-@app.route("/")
+@app.route("/jsonapi")
 def index():
     return render_template('index.html')
 
