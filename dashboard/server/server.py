@@ -8,7 +8,7 @@ from config.config import *
 from dashboard.server.security import authenticate, identity
 
 from dashboard.server.db import db
-from dashboard.server.models.user import RevokedTokenModel
+from dashboard.server.models.user import UserModel, RevokedTokenModel
 from dashboard.server.resources.colorlist import Colorlist, CompleteColorlist
 from dashboard.server.resources.good_widget import GoodWidget, CompleteGoodWidgets
 from dashboard.server.resources.campaign_set import CampaignSet, CompleteCampaignSets
@@ -39,6 +39,29 @@ def check_if_token_in_blacklist(decrypted_token):
 @app.route("/jsonapi")
 def index():
     return render_template('index.html')
+
+#this route only exists to add mike's credentials to the db
+@app.route("/jsonapi/addusermike")
+def add_user_mike():
+    username = 'michael@hallerweb.com'
+    password = mike_login_password
+
+    if UserModel.find_by_username(username):
+      return {'message': f'User {username} already exists'}, 400
+
+    new_user = UserModel(username, UserModel.generate_hash(password))
+
+    try:
+        new_user.save_to_db()
+        access_token = create_access_token(identity = username)
+        refresh_token = create_refresh_token(identity = username)
+        return {
+            'message': f'User {username} was created',
+            'access_token': access_token,
+            'refresh_token': refresh_token
+            }
+    except:
+        return {'message': f'error adding new user {username}'}, 500
 
 api.add_resource(UserRegistration, '/jsonapi/registration')
 api.add_resource(UserLogin, '/jsonapi/login')

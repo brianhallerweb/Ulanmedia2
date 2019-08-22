@@ -16,7 +16,7 @@ class Login extends Component {
   submitForm() {
     const username = this.state.username.trim();
     const password = this.state.password.trim();
-    fetch('/jsonapi/login', {
+    fetch(`/jsonapi/login/`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
