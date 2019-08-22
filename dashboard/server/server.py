@@ -7,6 +7,8 @@ from config.config import *
 
 from dashboard.server.security import authenticate, identity
 
+from flask_jwt_extended import create_access_token, create_refresh_token
+
 from dashboard.server.db import db
 from dashboard.server.models.user import UserModel, RevokedTokenModel
 from dashboard.server.resources.colorlist import Colorlist, CompleteColorlist
@@ -50,7 +52,6 @@ def add_user_mike():
       return {'message': f'User {username} already exists'}, 400
 
     new_user = UserModel(username, UserModel.generate_hash(password))
-    print(new_user)
 
     try:
         new_user.save_to_db()
