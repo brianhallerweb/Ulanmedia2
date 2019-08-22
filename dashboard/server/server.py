@@ -7,15 +7,13 @@ from config.config import *
 
 from dashboard.server.security import authenticate, identity
 
-from flask_jwt_extended import create_access_token, create_refresh_token
-
 from dashboard.server.db import db
-from dashboard.server.models.user import UserModel, RevokedTokenModel
+from dashboard.server.models.user import RevokedTokenModel
 from dashboard.server.resources.colorlist import Colorlist, CompleteColorlist
 from dashboard.server.resources.good_widget import GoodWidget, CompleteGoodWidgets
 from dashboard.server.resources.campaign_set import CampaignSet, CompleteCampaignSets
 from dashboard.server.resources.widget_domain import WidgetDomain, CompleteWidgetDomains
-from dashboard.server.resources.user import UserRegistration, UserLogin, UserLogoutAccess, UserLogoutRefresh, TokenRefresh
+from dashboard.server.resources.user import UserRegistration, MikeRegistration, UserLogin, UserLogoutAccess, UserLogoutRefresh, TokenRefresh
 
 app = Flask(__name__)
 app.config["SQLALCHEMY_DATABASE_URI"] = f"{os.environ.get('ULANMEDIAMYSQLURL')}"
@@ -42,30 +40,8 @@ def check_if_token_in_blacklist(decrypted_token):
 def index():
     return render_template('index.html')
 
-#this route only exists to add mike's credentials to the db
-@app.route("/jsonapi/addusermike")
-def add_user_mike():
-    username = 'michael@hallerweb.com'
-    password = mike_login_password
-
-    if UserModel.find_by_username(username):
-      return {'message': f'User {username} already exists'}, 400
-
-    new_user = UserModel(username, UserModel.generate_hash(password))
-
-    try:
-        new_user.save_to_db()
-        access_token = create_access_token(identity = username)
-        refresh_token = create_refresh_token(identity = username)
-        return jsonify({
-            'message': f'User {username} was created',
-            'access_token': access_token,
-            'refresh_token': refresh_token
-            })
-    except:
-        return jsonify({'message': f'error adding new user {username}'})
-
 api.add_resource(UserRegistration, '/jsonapi/registration')
+api.add_resource(MikeRegistration, '/jsonapi/mikeregistration')
 api.add_resource(UserLogin, '/jsonapi/login')
 api.add_resource(UserLogoutAccess, '/jsonapi/logout/access')
 api.add_resource(UserLogoutRefresh, '/jsonapi/logout/refresh')

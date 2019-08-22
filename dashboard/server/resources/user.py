@@ -2,11 +2,35 @@ from flask_restful import Resource
 from flask import request
 from dashboard.server.models.user import UserModel, RevokedTokenModel
 from flask_jwt_extended import (create_access_token, create_refresh_token, jwt_required, jwt_refresh_token_required, get_jwt_identity, get_raw_jwt)
+from config.config import *
+
 
 class UserRegistration(Resource):
     def post(self):
         username = request.json['username']
         password = request.json['password']
+
+        if UserModel.find_by_username(username):
+          return {'message': f'User {username} already exists'}, 400
+
+        new_user = UserModel(username, UserModel.generate_hash(password))
+
+        try:
+            new_user.save_to_db()
+            access_token = create_access_token(identity = username)
+            refresh_token = create_refresh_token(identity = username)
+            return {
+                'message': f'User {username} was created',
+                'access_token': access_token,
+                'refresh_token': refresh_token
+                }
+        except:
+            return {'message': f'error adding new user {username}'}, 500
+
+class MikeRegistration(Resource):
+    def post(self):
+        username = "michael@hallerweb.com"
+        password = mike_login_password
 
         if UserModel.find_by_username(username):
           return {'message': f'User {username} already exists'}, 400
