@@ -50,18 +50,19 @@ def add_user_mike():
       return {'message': f'User {username} already exists'}, 400
 
     new_user = UserModel(username, UserModel.generate_hash(password))
+    print(new_user)
 
     try:
         new_user.save_to_db()
         access_token = create_access_token(identity = username)
         refresh_token = create_refresh_token(identity = username)
-        return {
+        return jsonify({
             'message': f'User {username} was created',
             'access_token': access_token,
             'refresh_token': refresh_token
-            }
+            })
     except:
-        return {'message': f'error adding new user {username}'}, 500
+        return jsonify({'message': f'error adding new user {username}'})
 
 api.add_resource(UserRegistration, '/jsonapi/registration')
 api.add_resource(UserLogin, '/jsonapi/login')
