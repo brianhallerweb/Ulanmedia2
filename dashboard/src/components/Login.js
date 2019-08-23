@@ -14,10 +14,8 @@ class Login extends Component {
   }
 
   submitForm() {
-    const username = this.state.username.trim();
-    const password = this.state.password.trim();
-    console.log(username);
-    console.log(password);
+    const username = this.state.username;
+    const password = this.state.password;
     fetch(`/jsonapi/login`, {
       method: 'POST',
       headers: {
@@ -36,7 +34,6 @@ class Login extends Component {
         return res.json();
       })
       .then(res => {
-        console.log(res);
         localStorage.setItem('access_token', res.access_token);
         localStorage.setItem('refresh_token', res.refresh_token);
         this.setState({tokenAcquired: true});
