@@ -1,4 +1,5 @@
-from flask import Flask, request, jsonify, send_from_directory, render_template
+from flask import Flask, request, jsonify
+#, send_from_directory, render_template
 from flask_sqlalchemy import SQLAlchemy
 from flask_restful import Api
 from flask_jwt_extended import JWTManager
@@ -36,9 +37,9 @@ def check_if_token_in_blacklist(decrypted_token):
     jti = decrypted_token['jti']
     return RevokedTokenModel.is_jti_blacklisted(jti)
 
-@app.route("/jsonapi")
-def index():
-    return render_template('index.html')
+# @app.route("/jsonapi")
+# def index():
+    # return render_template('index.html')
 
 api.add_resource(UserRegistration, '/jsonapi/registration')
 api.add_resource(MikeRegistration, '/jsonapi/mikeregistration')
