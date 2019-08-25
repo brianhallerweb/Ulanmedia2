@@ -83,7 +83,7 @@ def set_cost_widgets(days_ago):
     
         for widget in widgets_data.values():
         
-            sql = f"INSERT INTO cost_widgets(cost_date, voluum_campaign_id, traffic_campaign_id, traffic_campaign_name, traffic_widget_id, traffic_widget_bid, traffic_widget_coefficient, traffic_widget_clicks, traffic_widget_cost) VALUES('{datetime.now()}', '{vol_campaign_id}', '{campaign_id}', '{campaign_name}', '{str(widget['widget_id'])}', '{str(widget['bid'])}', '{str(widget['coeff'])}', '{str(widget['clicks'])}', '{str(widget['cost'])}')"
+            sql = f"INSERT INTO cost_widgets(cost_date, voluum_campaign_id, traffic_campaign_id, traffic_campaign_name, traffic_widget_id, traffic_widget_bid, traffic_widget_coefficient, traffic_widget_clicks, traffic_widget_cost) VALUES('{datetime.now()}', '{vol_campaign_id}', '{mgid_campaign_id}', '{campaign_name}', '{str(widget['widget_id'])}', '{str(widget['bid'])}', '{str(widget['coeff'])}', '{str(widget['clicks'])}', '{str(widget['cost'])}')"
             mycursor.execute(sql)
     
     
