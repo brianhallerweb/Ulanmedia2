@@ -16,6 +16,7 @@ flask-restful = "*"
 uwsgi = "*"
 passlib = "*"
 flask-jwt-extended = "*"
+mysql-connector = "*"
 
 [requires]
 python_version = "3.7"
