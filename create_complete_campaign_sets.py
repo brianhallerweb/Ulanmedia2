@@ -3,8 +3,8 @@ import mysql.connector
 def create_complete_campaign_sets():
     mydb = mysql.connector.connect(
       host="localhost",
-      user="bsh",
-      passwd="kensington",
+      user="ulan",
+      passwd="missoula1",
       database="ulanmedia"
     )
     
