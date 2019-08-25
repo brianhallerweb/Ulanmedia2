@@ -63,6 +63,8 @@ def set_cost_widgets(days_ago):
         res = res.json()
     
         widgets_data = {}
+        if res[mgid_campaign_id][start_date + "_" + end_date] == []:
+            return widgets_data
         for id, data in res[mgid_campaign_id][start_date + "_" + end_date].items():
             widget_id = id
             if data["sources"]:
