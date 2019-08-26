@@ -1,4 +1,4 @@
-import requests
+import requests 
 from datetime import datetime, timedelta
 import pytz
 import sys
@@ -10,29 +10,19 @@ import pprint
 pp=pprint.PrettyPrinter(indent=2)
 
 def set_cost_widgets(days_ago):
-    ##################
-    # set up mysql
+    ###############
+    #mgid dates
     
-    mydb = mysql.connector.connect(
-      host="localhost",
-      user="ulan",
-      passwd="missoula1",
-      database="ulanmedia"
-    )
+    timezone = 'america/los_angeles'
+    start_date_utc = pytz.utc.localize(datetime.utcnow()) - timedelta(days_ago)
+    start_date_pst = start_date_utc.astimezone(pytz.timezone(timezone))
+    end_date_utc = pytz.utc.localize(datetime.utcnow()) - timedelta(days_ago)
+    end_date_pst = end_date_utc.astimezone(pytz.timezone(timezone))
     
-    mycursor = mydb.cursor()
-    ################################# 
-    ################################# 
-    ################################# 
-    ################################# 
-    ################################# 
-    ################################# 
-    ################################# 
-    ################################# 
-    # the date can't be hardcoded
-    # remember to stip hours minutes seconds
-    sql = f"delete from cost_widgets where cost_date like '2019-08-24%'"
-    mycursor.execute(sql)
+    start_date = start_date_pst.strftime("%Y-%m-%d")
+    end_date = end_date_pst.strftime("%Y-%m-%d")
+
+    date_to_put_in_sql = start_date_pst.replace(tzinfo=None, microsecond=0)
 
     ################
     # get mgid token
@@ -43,25 +33,23 @@ def set_cost_widgets(days_ago):
              data={"email": mgid_login, "password": mgid_password})
     
     token = res.json()["token"] 
-    
-    ###############
-    #mgid dates
-    
-    # days_ago = 1
-    timezone = 'america/los_angeles'
-    start_date_utc = pytz.utc.localize(datetime.utcnow()) - timedelta(days_ago)
-    start_date_pst = start_date_utc.astimezone(pytz.timezone(timezone))
-    # for mgid, the end date is inclusive, so the end date needs to be
-    # yesterday in order to include yesterdays data.
-    end_date_utc = pytz.utc.localize(datetime.utcnow()) - timedelta(days_ago)
-    end_date_pst = end_date_utc.astimezone(pytz.timezone(timezone))
-    
-    start_date = start_date_pst.strftime("%Y-%m-%d")
-    end_date = end_date_pst.strftime("%Y-%m-%d")
 
-    date_to_put_in_sql = start_date_pst.replace(tzinfo=None, microsecond=0)
+    ##################
+    # set up mysql
     
+    mydb = mysql.connector.connect(
+      host="localhost",
+      user= mysql_user,
+      passwd= mysql_password,
+      database="ulanmedia"
+    )
     
+    mycursor = mydb.cursor()
+
+
+    sql = f"delete from cost_widgets where cost_date like '{start_date}%'"
+    mycursor.execute(sql)
+
     ##################
     # get data from mgid
     

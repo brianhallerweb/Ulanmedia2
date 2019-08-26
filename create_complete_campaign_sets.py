@@ -1,10 +1,11 @@
 import mysql.connector
+from config.config import * 
 
 def create_complete_campaign_sets():
     mydb = mysql.connector.connect(
       host="localhost",
-      user="ulan",
-      passwd="missoula1",
+      user= mysql_user,
+      passwd= mysql_password,
       database="ulanmedia"
     )
     
