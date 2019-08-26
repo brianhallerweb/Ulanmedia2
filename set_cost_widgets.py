@@ -31,7 +31,7 @@ def set_cost_widgets(days_ago):
     ################################# 
     # the date can't be hardcoded
     # remember to stip hours minutes seconds
-    sql = f"delete from cost_widgets where cost_date like '2019-08-24%"
+    sql = f"delete from cost_widgets where cost_date like '2019-08-24%'"
     mycursor.execute(sql)
 
     ################
