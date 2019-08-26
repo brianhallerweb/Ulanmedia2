@@ -96,4 +96,3 @@ def set_cost_widgets(days_ago):
     
             mydb.commit()
 
-set_cost_widgets(1)
