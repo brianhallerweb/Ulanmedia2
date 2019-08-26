@@ -10,6 +10,30 @@ import pprint
 pp=pprint.PrettyPrinter(indent=2)
 
 def set_cost_widgets(days_ago):
+    ##################
+    # set up mysql
+    
+    mydb = mysql.connector.connect(
+      host="localhost",
+      user="ulan",
+      passwd="missoula1",
+      database="ulanmedia"
+    )
+    
+    mycursor = mydb.cursor()
+    ################################# 
+    ################################# 
+    ################################# 
+    ################################# 
+    ################################# 
+    ################################# 
+    ################################# 
+    ################################# 
+    # the date can't be hardcoded
+    # remember to stip hours minutes seconds
+    sql = f"delete from cost_widgets where cost_date like '2019-08-24%"
+    mycursor.execute(sql)
+
     ################
     # get mgid token
     
@@ -37,17 +61,6 @@ def set_cost_widgets(days_ago):
 
     date_to_put_in_sql = start_date_pst.replace(tzinfo=None, microsecond=0)
     
-    ##################
-    # set up mysql
-    
-    mydb = mysql.connector.connect(
-      host="localhost",
-      user="ulan",
-      passwd="missoula1",
-      database="ulanmedia"
-    )
-    
-    mycursor = mydb.cursor()
     
     ##################
     # get data from mgid
