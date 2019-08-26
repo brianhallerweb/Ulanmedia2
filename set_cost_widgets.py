@@ -5,6 +5,7 @@ import sys
 import mysql.connector
 from config.config import *
 from create_complete_campaign_sets import create_complete_campaign_sets
+
 import pprint
 pp=pprint.PrettyPrinter(indent=2)
 
@@ -71,21 +72,23 @@ def set_cost_widgets(days_ago):
                 for source_id, source_data in data["sources"].items():
                     if source_id is not "0":
                         widget_id = f"{id}s{source_id}"
+                    if source_data['spent'] == 0:
+                        continue
+                         
                     widgets_data[widget_id] = {"widget_id": widget_id, "clicks":
                     source_data["clicks"], "cost": source_data["spent"],
-                    "coeff": source_data["qualityFactor"], "bid":
-                    float(source_data["cpc"])/float(source_data["qualityFactor"])}
+                    "coeff": source_data["qualityFactor"], "cpc": source_data["cpc"]}
             else: 
+                if data['spent'] == 0:
+                    continue
                 widgets_data[widget_id] = {"widget_id": widget_id, "clicks":
                         data["clicks"], "cost": data["spent"],
-                        "coeff": data["qualityFactor"], "bid":
-                        float(data["cpc"])/float(data["qualityFactor"])}
-    
-    
+                        "coeff": data["qualityFactor"], "cpc":
+                        data["cpc"]}
     
         for widget in widgets_data.values():
         
-            sql = f"INSERT INTO cost_widgets(cost_date, voluum_campaign_id, traffic_campaign_id, traffic_campaign_name, traffic_widget_id, traffic_widget_bid, traffic_widget_coefficient, traffic_widget_clicks, traffic_widget_cost) VALUES('{datetime.now()}', '{vol_campaign_id}', '{mgid_campaign_id}', '{campaign_name}', '{str(widget['widget_id'])}', '{str(widget['bid'])}', '{str(widget['coeff'])}', '{str(widget['clicks'])}', '{str(widget['cost'])}')"
+            sql = f"INSERT INTO cost_widgets(cost_date, voluum_campaign_id, traffic_campaign_id, traffic_campaign_name, traffic_widget_id, traffic_widget_cpc, traffic_widget_coefficient, traffic_widget_clicks, traffic_widget_cost) VALUES('{datetime.now()}', '{vol_campaign_id}', '{mgid_campaign_id}', '{campaign_name}', '{str(widget['widget_id'])}', '{str(widget['cpc'])}', '{str(widget['coeff'])}', '{str(widget['clicks'])}', '{str(widget['cost'])}')"
             mycursor.execute(sql)
     
     
