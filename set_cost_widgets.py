@@ -35,7 +35,7 @@ def set_cost_widgets(days_ago):
     start_date = start_date_pst.strftime("%Y-%m-%d")
     end_date = end_date_pst.strftime("%Y-%m-%d")
 
-    date_to_put_in_sql = datetime.now() - timedelta(days_ago)
+    date_to_put_in_sql = start_date_pst
     
     ##################
     # set up mysql
