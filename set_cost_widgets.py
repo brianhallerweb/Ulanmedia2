@@ -29,7 +29,7 @@ def set_cost_widgets(days_ago):
     start_date_pst = start_date_utc.astimezone(pytz.timezone(timezone))
     # for mgid, the end date is inclusive, so the end date needs to be
     # yesterday in order to include yesterdays data.
-    end_date_utc = pytz.utc.localize(datetime.utcnow()) - timedelta(1)
+    end_date_utc = pytz.utc.localize(datetime.utcnow()) - timedelta(days_ago)
     end_date_pst = end_date_utc.astimezone(pytz.timezone(timezone))
     
     start_date = start_date_pst.strftime("%Y-%m-%d")
