@@ -34,6 +34,8 @@ def set_cost_widgets(days_ago):
     
     start_date = start_date_pst.strftime("%Y-%m-%d")
     end_date = end_date_pst.strftime("%Y-%m-%d")
+
+    date_to_put_in_sql = datetime.now() - timedelta(days_ago)
     
     ##################
     # set up mysql
@@ -88,10 +90,9 @@ def set_cost_widgets(days_ago):
     
         for widget in widgets_data.values():
         
-            sql = f"INSERT INTO cost_widgets(cost_date, voluum_campaign_id, traffic_campaign_id, traffic_campaign_name, traffic_widget_id, traffic_widget_cpc, traffic_widget_coefficient, traffic_widget_clicks, traffic_widget_cost) VALUES('{datetime.now()}', '{vol_campaign_id}', '{mgid_campaign_id}', '{campaign_name}', '{str(widget['widget_id'])}', '{str(widget['cpc'])}', '{str(widget['coeff'])}', '{str(widget['clicks'])}', '{str(widget['cost'])}')"
+            sql = f"INSERT INTO cost_widgets(cost_date, voluum_campaign_id, traffic_campaign_id, traffic_campaign_name, traffic_widget_id, traffic_widget_cpc, traffic_widget_coefficient, traffic_widget_clicks, traffic_widget_cost) VALUES('{date_to_put_in_sql}', '{vol_campaign_id}', '{mgid_campaign_id}', '{campaign_name}', '{str(widget['widget_id'])}', '{str(widget['cpc'])}', '{str(widget['coeff'])}', '{str(widget['clicks'])}', '{str(widget['cost'])}')"
             mycursor.execute(sql)
     
-    
-    mydb.commit()
+            mydb.commit()
 
 set_cost_widgets(1)
