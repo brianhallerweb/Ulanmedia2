@@ -13,17 +13,7 @@ import pprint
 pp=pprint.PrettyPrinter(indent=2)
 
 def set_cost_ads(days_ago):
-        ##################
-    # set up mysql
 
-    mydb = mysql.connector.connect(
-      host="localhost",
-      user= mysql_user,
-      passwd= mysql_password,
-      database="ulanmedia"
-    )
-
-    mycursor = mydb.cursor()
 
     # ##############
     # get mgid token
@@ -34,8 +24,9 @@ def set_cost_ads(days_ago):
              data={"email": mgid_login, "password": mgid_password})
     
     token = res.json()["token"] 
+
     #############
-    #mgid dates
+    # mgid dates
     
     timezone = 'america/los_angeles'
     start_date_utc = pytz.utc.localize(datetime.utcnow()) - timedelta(days_ago)
@@ -47,6 +38,23 @@ def set_cost_ads(days_ago):
     end_date = end_date_pst.strftime("%Y-%m-%d")
 
     date_to_put_in_sql = start_date_pst.replace(tzinfo=None, microsecond=0)
+
+    ##################
+    # set up mysql
+
+    mydb = mysql.connector.connect(
+      host="localhost",
+      user= mysql_user,
+      passwd= mysql_password,
+      database="ulanmedia"
+    )
+
+    mycursor = mydb.cursor()
+
+    sql = f"delete from cost_ads where cost_date like '{start_date}%'"
+
+    mycursor.execute(sql)
+    ####################
 
     campaigns = create_complete_campaign_sets()
 
@@ -81,7 +89,7 @@ def set_cost_ads(days_ago):
             campaign_id = str(ad["campaignId"])
             clicks = ad["statistics"]["clicks"]
             cost = ad["statistics"]["spent"]
-            imps = ad["statistics"]["hits"]
+
             if imps == 0:
                 ctr = 0
             else:
@@ -118,7 +126,7 @@ def set_cost_ads(days_ago):
     for ad in ads_data.values():
         ad_id = ad['ad_id']
         mgid_id = ad['mgid_id']
-        campaign_name = ad['mgid_id']
+        campaign_name = get_campaign_name_from_mgid_id(mgid_id)
         vol_id = get_vol_id_from_mgid_id(mgid_id)
         cost = ad['cost']
         clicks = ad['clicks']
