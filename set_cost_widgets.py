@@ -4,7 +4,7 @@ import pytz
 import sys
 import mysql.connector
 from config.config import *
-from create_complete_campaign_sets import create_complete_campaign_sets
+from utility_functions.create_complete_campaign_sets import create_complete_campaign_sets
 
 import pprint
 pp=pprint.PrettyPrinter(indent=2)
