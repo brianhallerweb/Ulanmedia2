@@ -122,7 +122,10 @@ def set_cost_ads(days_ago):
         vol_id = get_vol_id_from_mgid_id(mgid_id)
         cost = ad['cost']
         clicks = ad['clicks']
-        bid = cost/clicks
+        if clicks > 0:
+            bid = cost/clicks
+        else:
+            bid = 0
         sql = f"INSERT INTO cost_ads(cost_date, voluum_campaign_id, traffic_campaign_id, traffic_campaign_name, traffic_ad_id, traffic_ad_bid, traffic_ad_clicks, traffic_ad_cost) VALUES('{date_to_put_in_sql}', '{vol_id}', '{mgid_id}', '{campaign_name}', '{str(ad_id)}','{str(bid)}', '{str(clicks)}', '{str(cost)}')"
 
         mycursor.execute(sql)
