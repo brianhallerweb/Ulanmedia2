@@ -7,6 +7,7 @@ import re
 from config.config import *
 from utility_functions.create_complete_campaign_sets import create_complete_campaign_sets
 from get_vol_id_from_mgid_id import get_vol_id_from_mgid_id
+from get_campaign_name_from_mgid_id import get_campaign_name_from_mgid_id
 
 import pprint
 pp=pprint.PrettyPrinter(indent=2)
@@ -117,6 +118,7 @@ def set_cost_ads(days_ago):
     for ad in ads_data.values():
         ad_id = ad['ad_id']
         mgid_id = ad['mgid_id']
+        campaign_name = ad['mgid_id']
         vol_id = get_vol_id_from_mgid_id(mgid_id)
         cost = ad['cost']
         clicks = ad['clicks']
