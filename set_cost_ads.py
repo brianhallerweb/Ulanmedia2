@@ -89,7 +89,7 @@ def set_cost_ads(days_ago):
             campaign_id = str(ad["campaignId"])
             clicks = ad["statistics"]["clicks"]
             cost = ad["statistics"]["spent"]
-
+            imps = ad["statistics"]["hits"]
             if imps == 0:
                 ctr = 0
             else:
