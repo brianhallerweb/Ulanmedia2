@@ -41,13 +41,23 @@ const CampaignSet = ({
         />
       </td>
       <td>
-        <input
+        <select
+          name="campaign_status"
+          defaultValue={campaignStatus}
+          onChange={e =>
+            handleRowUpdate(index, 'campaign_status', e.target.value)
+          }>
+          <option value="active">Active</option>
+          <option value="inactive">Inactive</option>
+        </select>
+
+        {/*<input
           type="text"
           value={campaignStatus}
           onChange={e =>
             handleRowUpdate(index, 'campaign_status', e.target.value)
           }
-        />
+        /> */}
       </td>
       <td>
         <button
