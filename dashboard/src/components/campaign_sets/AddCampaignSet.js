@@ -96,11 +96,10 @@ class AddCampaignSet extends Component {
             <label>campaign status</label>
           </div>
           <div>
-            <input
-              className="add-widget__input"
-              type="text"
-              name="campaignStatus"
-            />
+            <select name="campaignStatus" defaultValue={'active'}>
+              <option value="active">Active</option>
+              <option value="inactive">Inactive</option>
+            </select>
           </div>
           <button style={{marginTop: 5}} className="button">
             Add campaign set
