@@ -42,7 +42,6 @@ const CampaignSet = ({
       </td>
       <td>
         <select
-          name="campaign_status"
           defaultValue={campaignStatus}
           onChange={e =>
             handleRowUpdate(index, 'campaign_status', e.target.value)
