@@ -46,6 +46,7 @@ class AddCampaignSet extends Component {
               className="add-widget__input"
               type="text"
               name="volCampaignID"
+              placeholder="39eded96-4619-4c00-b0e6-bfdc622c894c"
             />
           </div>
           <div>
@@ -56,6 +57,7 @@ class AddCampaignSet extends Component {
               className="add-widget__input"
               type="text"
               name="mgidCampaignID"
+              placeholder="506299"
             />
           </div>
           <div>
@@ -66,6 +68,7 @@ class AddCampaignSet extends Component {
               className="add-widget__input"
               type="text"
               name="campaignName"
+              placeholder="bin_argentina_all_desktop_cpc_0.01"
             />
           </div>
           <div>
@@ -78,6 +81,7 @@ class AddCampaignSet extends Component {
               type="text"
               name="maxLeadCPA"
               size="1"
+              placeholder="2"
             />
           </div>
           <div>
@@ -90,6 +94,7 @@ class AddCampaignSet extends Component {
               type="text"
               name="maxSaleCPA"
               size="1"
+              placeholder="300"
             />
           </div>
           <div>
