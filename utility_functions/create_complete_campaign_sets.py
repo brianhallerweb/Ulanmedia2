@@ -1,5 +1,5 @@
 import mysql.connector
-from config.config import * 
+from ulanmedia2_config.config import * 
 
 def create_complete_campaign_sets():
     mydb = mysql.connector.connect(

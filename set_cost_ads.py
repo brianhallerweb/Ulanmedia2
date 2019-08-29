@@ -4,7 +4,7 @@ import pytz
 import sys
 import mysql.connector
 import re
-from config.config import *
+from ulanmedia2_config.config import * 
 from utility_functions.create_complete_campaign_sets import create_complete_campaign_sets
 from get_vol_id_from_mgid_id import get_vol_id_from_mgid_id
 from get_campaign_name_from_mgid_id import get_campaign_name_from_mgid_id
