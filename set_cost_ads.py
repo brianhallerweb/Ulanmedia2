@@ -13,6 +13,9 @@ import pprint
 pp=pprint.PrettyPrinter(indent=2)
 
 def set_cost_ads(days_ago):
+    if (days_ago != 0) | (days_ago != 1):
+        print("improper use of set_cost_ads()")
+        sys.exit()
 
 
     # ##############
@@ -87,8 +90,12 @@ def set_cost_ads(days_ago):
             # extract data and put into variables
             ad_id = str(ad["id"])
             campaign_id = str(ad["campaignId"])
-            clicks = ad["statistics"]["clicks"]
-            cost = ad["statistics"]["spent"]
+            if days_ago == 0:
+                clicks = ad["statistics"]["clicks_today"]
+                cost = ad["statistics"]["spent_today"]
+            if days_ago == 1:
+                clicks = ad["statistics"]["clicks_yesterday"]
+                cost = ad["statistics"]["spent_yesterday"]
             imps = ad["statistics"]["hits"]
             if imps == 0:
                 ctr = 0
