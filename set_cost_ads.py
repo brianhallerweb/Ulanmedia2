@@ -13,7 +13,7 @@ import pprint
 pp=pprint.PrettyPrinter(indent=2)
 
 def set_cost_ads(days_ago):
-    if (days_ago != 0) | (days_ago != 1):
+    if (days_ago != 0) & (days_ago != 1):
         print("improper use of set_cost_ads()")
         sys.exit()
 
