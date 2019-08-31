@@ -57,10 +57,8 @@ def update_traffic_click_id_in_conversions_table(days_ago):
     for row in res["rows"]:
         vol_click_id = row["clickId"]
         mgid_click_id = row["externalId"]
-        sql = f"UPDATE `conversions` SET `traffic_click_id` = '{mgid_click_id}' WHERE `voluum_click_id` = '{vol_click_id}'"
-
+        sql = f"UPDATE conversions SET traffic_click_id='{mgid_click_id}' WHERE voluum_click_id='{vol_click_id}'"
         mycursor.execute(sql)
-
         mydb.commit()
 
 
