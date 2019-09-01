@@ -1,4 +1,4 @@
 from update_traffic_click_id_in_conversions_table import update_traffic_click_id_in_conversions_table
 
-update_traffic_click_id_in_conversions_table(0)
+update_traffic_click_id_in_conversions_table()
 print("conversions table updated with mgid click ids")
