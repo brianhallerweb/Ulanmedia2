@@ -2,3 +2,5 @@ ulanmedia2_config/
 node_modules/
 **/__pycache__/
 data/
+Pipfile
+Pipfile.lock
