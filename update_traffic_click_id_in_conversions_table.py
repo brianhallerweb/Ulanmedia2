@@ -13,10 +13,8 @@ from get_campaign_name_from_mgid_id import get_campaign_name_from_mgid_id
 import pprint
 pp=pprint.PrettyPrinter(indent=2)
 
-def update_traffic_click_id_in_conversions_table(days_ago):
-    if (days_ago != 0):
-        print("improper use of update_traffic_click_id_in_conversions_table()")
-        sys.exit()
+def update_traffic_click_id_in_conversions_table():
+    # this function only updates clicks ids for today
     
     ###########
     token = get_vol_access_token(vol_access_id, vol_access_key)
@@ -25,14 +23,12 @@ def update_traffic_click_id_in_conversions_table(days_ago):
     # vol dates
     
     timezone = 'america/los_angeles'
-    start_date_utc = pytz.utc.localize(datetime.utcnow()) - timedelta(days_ago)
+    start_date_utc = pytz.utc.localize(datetime.utcnow())
     start_date_pst = start_date_utc.astimezone(pytz.timezone(timezone))
-    end_date_utc = pytz.utc.localize(datetime.utcnow()) 
+    end_date_utc = pytz.utc.localize(datetime.utcnow()) + timedelta(1) 
     end_date_pst = end_date_utc.astimezone(pytz.timezone(timezone))
     start_date = start_date_pst.strftime("%Y-%m-%d")
     end_date = end_date_pst.strftime("%Y-%m-%d")
-
-    date_to_put_in_sql = start_date_pst.replace(tzinfo=None, microsecond=0)
 
     ##################
     # set up mysql
