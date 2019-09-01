@@ -46,9 +46,6 @@ def update_traffic_click_id_in_conversions_table(days_ago):
 
     mycursor = mydb.cursor()
 
-    # sql = f"delete from cost_ads where cost_date like '{start_date}%'"
-
-    # mycursor.execute(sql)
     ####################
 
     url = f"https://api.voluum.com/report/conversions?from={start_date}T00%3A00%3A00Z&to={end_date}T00%3A00%3A00Z&tz=America%2FLos_Angeles&sort=postbackTimestamp&direction=desc&columns=postbackTimestamp&columns=externalId&columns=clickId&columns=transactionId&columns=revenue&groupBy=conversion&offset=0&limit=100000&include=ACTIVE" 
