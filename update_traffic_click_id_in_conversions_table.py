@@ -14,7 +14,7 @@ import pprint
 pp=pprint.PrettyPrinter(indent=2)
 
 def update_traffic_click_id_in_conversions_table(days_ago):
-    if (days_ago != 1):
+    if (days_ago != 0):
         print("improper use of update_traffic_click_id_in_conversions_table()")
         sys.exit()
     

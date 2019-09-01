@@ -1,3 +1,3 @@
 from update_traffic_click_id_in_conversions_table import update_traffic_click_id_in_conversions_table
 
-update_traffic_click_id_in_conversions_table(1)
+update_traffic_click_id_in_conversions_table(0)
