@@ -22,3 +22,5 @@ mike_login_password = "minecacy"
 mysql_user = "bsh"
 mysql_password = "kensington"
 
+something = "something"
+
