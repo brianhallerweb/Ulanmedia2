@@ -1,0 +1,114 @@
+@import './base/settings';
+@import './base/base';
+
+.title h3, .title p {
+    display: inline;
+    padding-right: 10px; 
+}
+
+.is-active {
+  font-weight: 700;
+}
+
+// spinner loader
+.loader {
+    border: 5px solid #f3f3f3; 
+    border-top: 5px solid #6495ED; 
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    animation: spin 1s linear infinite;
+    position: fixed;
+    left: 50%;
+    margin-top: 80px;
+}
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+// global nav bar 
+.globalNavBar {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.globalNavItem {
+    display: inline;
+    margin-right: 10px;
+}
+
+// checkboxes
+.inputBox {
+    width: 38px;
+}
+
+// links underneath campaign name in each row
+.rowLink {
+    display: inline;
+    margin-right: 10px;
+}
+
+.fakeLink {
+    color: blue;
+    text-decoration: underline;
+}
+
+// the report tables 
+table {
+    font-family: Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+    margin-top: 10px;
+    overflow-y: scroll;
+}
+table th {
+    border: 1px solid #d3d3d3;
+    padding: 10px;
+    text-align: left;
+    background-color: #6495ED;
+    color: white;
+    position: sticky;
+    top: 0;
+}
+table td {
+    border: 1px solid #d3d3d3;
+    padding: 8px;
+}
+
+// this changes the opacity of a single row in a report when it is clicked. 
+.clicked {
+  opacity: .1;
+}
+
+// tooltip code
+//.tooltip {
+    //position: relative;
+    //display: inline-block;
+//}
+//.tooltip .tooltiptext {
+    //visibility: hidden;
+    //background-color: #555;
+    //width: 1200px;
+    //color: #fff;
+    //text-align: left;
+    //padding: 10px 10px;
+
+    ////needed for tooltip to respect line breaks
+    //white-space: pre-line;
+
+    ////Position the tooltip text
+    //position: absolute;
+    //z-index: 1;
+    //bottom: 125%;
+    //left: 50%;
+    //margin-left: -100px;
+
+//}
+
+//.tooltip:hover .tooltiptext {
+    //visibility: visible;
+    //opacity: 1;
+//} 
+
+
