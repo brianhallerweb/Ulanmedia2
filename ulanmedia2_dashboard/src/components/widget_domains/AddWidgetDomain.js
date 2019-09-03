@@ -23,7 +23,7 @@ class AddWidgetDomain extends Component {
             name="newWidgetDomains"
             placeholder="traffic source 1, widget id 1, domain 1, widget_domain_source 1                                                                      traffic source 2, widget id 2, domain 2, widget_domain source 2"
             rows={15}
-            cols={50}
+            cols={70}
           />
           <button className="button">Add widget domains</button>
         </form>

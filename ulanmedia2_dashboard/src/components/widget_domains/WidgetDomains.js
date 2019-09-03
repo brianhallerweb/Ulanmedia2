@@ -21,7 +21,7 @@ const WidgetDomains = ({widgetDomains, handleDelete}) => {
             trafficSource={widgetDomain.traffic_source}
             widgetID={widgetDomain.widget_id}
             domain={widgetDomain.domain}
-            widgetDomainSource={widgetDomain.widgetDomainSource}
+            widgetDomainSource={widgetDomain.widget_domain_source}
             handleDelete={handleDelete}
           />
         ))}
