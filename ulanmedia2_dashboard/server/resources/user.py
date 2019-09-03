@@ -2,7 +2,7 @@ from flask_restful import Resource
 from flask import request
 from ulanmedia2_dashboard.server.models.user import UserModel, RevokedTokenModel
 from flask_jwt_extended import (create_access_token, create_refresh_token, jwt_required, jwt_refresh_token_required, get_jwt_identity, get_raw_jwt)
-from config.config import *
+from ulanmedia2_config.config import *
 
 
 class UserRegistration(Resource):
