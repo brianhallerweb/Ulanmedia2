@@ -10,6 +10,7 @@ const WidgetDomains = ({widgetDomains, handleDelete}) => {
           <th>Traffic Source</th>
           <th>Widget ID</th>
           <th>Domain</th>
+          <th>Widget Domain Source</th>
           <th />
         </tr>
       </thead>
@@ -20,6 +21,7 @@ const WidgetDomains = ({widgetDomains, handleDelete}) => {
             trafficSource={widgetDomain.traffic_source}
             widgetID={widgetDomain.widget_id}
             domain={widgetDomain.domain}
+            widgetDomainSource={widgetDomain.widgetDomainSource}
             handleDelete={handleDelete}
           />
         ))}

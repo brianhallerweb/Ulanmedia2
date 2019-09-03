@@ -55,12 +55,13 @@ class Home extends Component {
       }
 
       const entireWidgetDomain = widgetDomain.split(',');
-      if (entireWidgetDomain.length !== 3) {
+      if (entireWidgetDomain.length !== 4) {
         continue;
       }
       const trafficSource = entireWidgetDomain[0].trim();
       const widgetID = entireWidgetDomain[1].trim();
       const domain = entireWidgetDomain[2].trim();
+      const widget_domain_source = entireWidgetDomain[3].trim();
 
       fetch(`/jsonapi/widgetdomain`, {
         method: 'POST',
@@ -72,6 +73,7 @@ class Home extends Component {
           traffic_source: trafficSource,
           widget_id: widgetID,
           domain: domain,
+          widget_domain_source: widget_domain_source,
         }),
       })
         .then(res => {
@@ -122,7 +124,7 @@ class Home extends Component {
     }
   }
 
-  handleDelete(trafficSource, widgetID, domain) {
+  handleDelete(trafficSource, widgetID, domain, widget_domain_source) {
     const successes = [];
     const errors = [];
 
@@ -136,6 +138,7 @@ class Home extends Component {
         traffic_source: trafficSource,
         widget_id: widgetID,
         domain: domain,
+        widget_domain_source: widget_domain_source,
       }),
     })
       .then(res => {

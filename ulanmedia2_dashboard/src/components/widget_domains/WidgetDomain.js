@@ -1,7 +1,13 @@
 //@format
 import React from 'react';
 
-const WidgetDomain = ({trafficSource, widgetID, domain, handleDelete}) => {
+const WidgetDomain = ({
+  trafficSource,
+  widgetID,
+  domain,
+  widgetDomainSource,
+  handleDelete,
+}) => {
   return (
     <tr key={widgetID}>
       <td>{trafficSource}</td>
@@ -13,8 +19,12 @@ const WidgetDomain = ({trafficSource, widgetID, domain, handleDelete}) => {
           {domain}
         </a>
       </td>
+      <td>{widgetDomainSource}</td>
       <td>
-        <button onClick={() => handleDelete(trafficSource, widgetID, domain)}>
+        <button
+          onClick={() =>
+            handleDelete(trafficSource, widgetID, domain, widgetDomainSource)
+          }>
           Remove
         </button>
       </td>
