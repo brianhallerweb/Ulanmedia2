@@ -2,6 +2,9 @@ from flask_restful import Resource, abort
 from flask import request, jsonify
 from flask_jwt_extended import jwt_required
 from ulanmedia2_dashboard.server.models.good_widget import GoodWidgetModel
+from ulanmedia2_dashboard.server.models.widget_domain import WidgetDomainModel
+from ulanmedia2_dashboard.server.db import db
+
 
 
 class GoodWidget(Resource):
@@ -44,8 +47,20 @@ class CompleteGoodWidgets(Resource):
     
     @jwt_required
     def get(self):
-        return {f'good_widgets': [good_widget.json() for good_widget in
-            GoodWidgetModel.query.all()]}
+        query_results = db.session.query(GoodWidgetModel, WidgetDomainModel).outerjoin(WidgetDomainModel, GoodWidgetModel.widget_id == WidgetDomainModel.widget_id).all()
+        json_to_return = {'good_widgets_and_domains':[]}
+        for result in query_results:
+            if result[1] != None:
+                widget_id = result[0].json()['widget_id']
+                domain = result[1].json()['domain']
+                row = {'widget_id': widget_id, 'domain': domain}
+            else:
+                widget_id = result[0].json()['widget_id']
+                row = {'widget_id': widget_id, 'domain': None}
+            json_to_return['good_widgets_and_domains'].append(row)
+
+        return json_to_return    
+
         
 
 

@@ -1,10 +1,11 @@
 //@format
 import React from 'react';
 
-const Widget = ({widgetID, handleDelete}) => {
+const Widget = ({widgetID, domain, handleDelete}) => {
   return (
     <tr key={widgetID}>
       <td>{widgetID}</td>
+      <td>{domain}</td>
       <td>
         <button onClick={() => handleDelete(widgetID)}>Remove</button>
       </td>

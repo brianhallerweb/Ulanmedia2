@@ -8,6 +8,7 @@ const Widgets = ({widgets, handleDelete}) => {
       <thead>
         <tr>
           <th>Widget ID</th>
+          <th>Domain</th>
           <th />
         </tr>
       </thead>
@@ -16,6 +17,7 @@ const Widgets = ({widgets, handleDelete}) => {
           <Widget
             key={widget.widget_id}
             widgetID={widget.widget_id}
+            domain={widget.domain}
             handleDelete={handleDelete}
           />
         ))}
