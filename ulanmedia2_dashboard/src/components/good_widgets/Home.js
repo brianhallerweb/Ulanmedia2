@@ -102,7 +102,7 @@ class Home extends Component {
           .then(res => res.json())
           .then(widgets => {
             this.setState({
-              widgets: widgets['good_widgets'],
+              widgets: widgets['good_widgets_and_domains'],
               successes,
               errors,
             });
@@ -165,7 +165,11 @@ class Home extends Component {
 
       .then(res => res.json())
       .then(widgets => {
-        this.setState({widgets: widgets['good_widgets'], successes, errors});
+        this.setState({
+          widgets: widgets['good_widgets_and_domains'],
+          successes,
+          errors,
+        });
       });
   }
 
