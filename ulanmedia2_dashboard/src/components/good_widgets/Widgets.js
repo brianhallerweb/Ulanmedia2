@@ -15,7 +15,6 @@ const Widgets = ({widgets, handleDelete}) => {
       <tbody>
         {widgets.map(widget => (
           <Widget
-            key={widget.widget_id}
             widgetID={widget.widget_id}
             domain={widget.domain}
             handleDelete={handleDelete}
