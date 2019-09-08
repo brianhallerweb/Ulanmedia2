@@ -13,7 +13,7 @@ from ulanmedia2_dashboard.server.resources.colorlist import Colorlist, CompleteC
 from ulanmedia2_dashboard.server.resources.good_widget import GoodWidget, CompleteGoodWidgets
 from ulanmedia2_dashboard.server.resources.campaign_set import CampaignSet, CompleteCampaignSets
 from ulanmedia2_dashboard.server.resources.widget_domain import WidgetDomain, CompleteWidgetDomains
-from ulanmedia2_dashboard.server.resources.user import UserRegistration, MikeRegistration, UserLogin, UserLogoutAccess, UserLogoutRefresh, TokenRefresh
+from ulanmedia2_dashboard.server.resources.user import UserLogin
 
 app = Flask(__name__)
 app.config["SQLALCHEMY_DATABASE_URI"] = f"{os.environ.get('ULANMEDIAMYSQLURL')}"
@@ -21,8 +21,8 @@ app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 app.config["PROPAGATE_EXCEPTIONS"] = True
 app.config['SECRET_KEY'] = flask_secret_key
 app.config['JWT_SECRET_KEY'] = flask_secret_key
-app.config['JWT_BLACKLIST_ENABLED'] = True
-app.config['JWT_BLACKLIST_TOKEN_CHECKS'] = ['access', 'refresh']
+# app.config['JWT_BLACKLIST_ENABLED'] = True
+# app.config['JWT_BLACKLIST_TOKEN_CHECKS'] = ['access', 'refresh']
 jwt = JWTManager(app)
 api = Api(app)
 db.init_app(app)
@@ -31,17 +31,23 @@ db.init_app(app)
 def create_tables():
     db.create_all()
 
-@jwt.token_in_blacklist_loader
-def check_if_token_in_blacklist(decrypted_token):
-    jti = decrypted_token['jti']
-    return RevokedTokenModel.is_jti_blacklisted(jti)
+# as of 9/6/19, not using this route
+# @jwt.token_in_blacklist_loader
+# def check_if_token_in_blacklist(decrypted_token):
+    # jti = decrypted_token['jti']
+    # return RevokedTokenModel.is_jti_blacklisted(jti)
 
-api.add_resource(UserRegistration, '/jsonapi/registration')
-api.add_resource(MikeRegistration, '/jsonapi/mikeregistration')
+# as of 9/6/19, not using this route
+# api.add_resource(UserRegistration, '/jsonapi/registration')
+# only used this route to put mike in the db
+# api.add_resource(MikeRegistration, '/jsonapi/mikeregistration')
 api.add_resource(UserLogin, '/jsonapi/login')
-api.add_resource(UserLogoutAccess, '/jsonapi/logout/access')
-api.add_resource(UserLogoutRefresh, '/jsonapi/logout/refresh')
-api.add_resource(TokenRefresh, '/jsonapi/token/refresh')
+# as of 9/6/19, not using this route
+# api.add_resource(UserLogoutAccess, '/jsonapi/logout/access')
+# as of 9/6/19, not using this route
+# api.add_resource(UserLogoutRefresh, '/jsonapi/logout/refresh')
+# as of 9/6/19, not using this route
+# api.add_resource(TokenRefresh, '/jsonapi/token/refresh')
 
 api.add_resource(Colorlist, '/jsonapi/<string:color>list')
 api.add_resource(CompleteColorlist, '/jsonapi/complete<string:color>list')

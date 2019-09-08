@@ -3,6 +3,7 @@ from flask import request
 from ulanmedia2_dashboard.server.models.user import UserModel, RevokedTokenModel
 from flask_jwt_extended import (create_access_token, create_refresh_token, jwt_required, jwt_refresh_token_required, get_jwt_identity, get_raw_jwt)
 from ulanmedia2_config.config import *
+import datetime
 
 
 class UserRegistration(Resource):
@@ -17,7 +18,7 @@ class UserRegistration(Resource):
 
         try:
             new_user.save_to_db()
-            access_token = create_access_token(identity = username)
+            access_token = create_access_token(identity = username, expires_delta = datetime.timedelta(days=5))
             refresh_token = create_refresh_token(identity = username)
             return {
                 'message': f'User {username} was created',
@@ -39,7 +40,9 @@ class MikeRegistration(Resource):
 
         try:
             new_user.save_to_db()
-            access_token = create_access_token(identity = username)
+            access_token = create_access_token(identity = username,
+                    expires_delta =
+                    datetime.timedelta(days=5))
             refresh_token = create_refresh_token(identity = username)
             return {
                 'message': f'User {username} was created',
@@ -59,7 +62,7 @@ class UserLogin(Resource):
             return {'message': f'User {username} doesn\'t exist'}
         
         if UserModel.verify_hash(password, current_user.password):
-            access_token = create_access_token(identity = username)
+            access_token = create_access_token(identity = username, expires_delta =  datetime.timedelta(days=5))
             refresh_token = create_refresh_token(identity = username)
             return {
                 'message': f'Logged in as {username}',
@@ -69,34 +72,33 @@ class UserLogin(Resource):
         else:
             return {'message': 'Wrong credentials'}, 500
       
-class UserLogoutAccess(Resource):
-    @jwt_required
-    def post(self):
-        jti = get_raw_jwt()['jti']
-        try:
-            revoked_token = RevokedTokenModel(jti = jti)
-            revoked_token.add()
-            return {'message': 'Access token has been revoked'}
-        except:
-            return {'message': 'Something went wrong'}, 500
+# class UserLogoutAccess(Resource):
+    # @jwt_required
+    # def post(self):
+        # jti = get_raw_jwt()['jti']
+        # try:
+            # revoked_token = RevokedTokenModel(jti = jti)
+            # revoked_token.add()
+            # return {'message': 'Access token has been revoked'}
+        # except:
+            # return {'message': 'Something went wrong'}, 500
 
+# class UserLogoutRefresh(Resource):
+    # @jwt_refresh_token_required
+    # def post(self):
+        # jti = get_raw_jwt()['jti']
+        # try:
+            # revoked_token = RevokedTokenModel(jti = jti)
+            # revoked_token.add()
+            # return {'message': 'Refresh token has been revoked'}
+        # except:
+            # return {'message': 'Something went wrong'}, 500 
 
-class UserLogoutRefresh(Resource):
-    @jwt_refresh_token_required
-    def post(self):
-        jti = get_raw_jwt()['jti']
-        try:
-            revoked_token = RevokedTokenModel(jti = jti)
-            revoked_token.add()
-            return {'message': 'Refresh token has been revoked'}
-        except:
-            return {'message': 'Something went wrong'}, 500 
-
-class TokenRefresh(Resource):
-    @jwt_refresh_token_required
-    def post(self):
-        current_user = get_jwt_identity()
-        access_token = create_access_token(identity = current_user)
-        return {'access_token': access_token} 
+# class TokenRefresh(Resource):
+    # @jwt_refresh_token_required
+    # def post(self):
+        # current_user = get_jwt_identity()
+        # access_token = create_access_token(identity = current_user)
+        # return {'access_token': access_token} 
 
 

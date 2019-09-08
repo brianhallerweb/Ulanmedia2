@@ -4,6 +4,7 @@ import Logout from '../Logout';
 import Title from './Title';
 import CampaignSets from './CampaignSets';
 import AddCampaignSet from './AddCampaignSet';
+import handleReqAuthError from '../utilities/handleReqAuthError';
 import {Redirect} from 'react-router-dom';
 
 class Home extends Component {
@@ -18,10 +19,16 @@ class Home extends Component {
   }
 
   componentDidMount() {
+    this.getCompleteCampaignSets();
+  }
+
+  getCompleteCampaignSets() {
+    const access_token = localStorage.getItem('access_token');
+
     fetch(`/jsonapi/completecampaignsets`, {
       method: 'GET',
       headers: {
-        Authorization: `Bearer ${localStorage.getItem('access_token')}`,
+        Authorization: `Bearer ${access_token}`,
       },
     })
       .then(res => {
@@ -31,6 +38,7 @@ class Home extends Component {
             this.setState({authenticated: false});
           }
         }
+
         return res;
       })
       .then(res => res.json())
