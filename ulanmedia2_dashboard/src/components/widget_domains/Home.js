@@ -4,6 +4,7 @@ import Logout from '../Logout';
 import Title from './Title';
 import WidgetDomains from './WidgetDomains';
 import AddWidgetDomain from './AddWidgetDomain';
+import GlobalNavBar from '../GlobalNavBar';
 import {Redirect} from 'react-router-dom';
 
 class Home extends Component {
@@ -192,6 +193,7 @@ class Home extends Component {
     return (
       <div>
         {!this.state.authenticated && <Redirect to="/" />}
+        <GlobalNavBar />
         <Title />
         {this.state.successes.length > 0 &&
           this.state.successes.map(success => (

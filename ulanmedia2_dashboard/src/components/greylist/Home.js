@@ -11,6 +11,7 @@ class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      color: 'grey',
       widgets: [],
       authenticated: true,
       successes: [],
@@ -19,7 +20,7 @@ class Home extends Component {
   }
 
   componentDidMount() {
-    fetch(`/jsonapi/completegoodwidgets`, {
+    fetch(`/jsonapi/complete${this.state.color}list`, {
       method: 'GET',
       headers: {
         Authorization: `Bearer ${localStorage.getItem('access_token')}`,
@@ -35,8 +36,8 @@ class Home extends Component {
         return res;
       })
       .then(res => res.json())
-      .then(widgets => {
-        this.setState({widgets: widgets['good_widgets_and_domains']});
+      .then(list => {
+        this.setState({widgets: list[`${this.state.color}list`]});
       });
   }
 
@@ -53,7 +54,7 @@ class Home extends Component {
     for (let widget of widgets) {
       widget = widget.trim();
       if (widget) {
-        fetch(`/jsonapi/goodwidget`, {
+        fetch(`/jsonapi/${this.state.color}list`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -77,13 +78,12 @@ class Home extends Component {
             if (res['success_message']) {
               successes.push(res['success_message']);
             }
-
             if (res['error_message']) {
               errors.push(res['error_message']);
             }
           })
           .then(() =>
-            fetch(`/jsonapi/completegoodwidgets`, {
+            fetch(`/jsonapi/complete${this.state.color}list`, {
               method: 'GET',
               headers: {
                 Authorization: `Bearer ${localStorage.getItem('access_token')}`,
@@ -99,16 +99,14 @@ class Home extends Component {
             }
             return res;
           })
-
           .then(res => res.json())
-          .then(widgets => {
+          .then(list => {
             this.setState({
-              widgets: widgets['good_widgets_and_domains'],
+              widgets: list[`${this.state.color}list`],
               successes,
               errors,
             });
-          })
-          .catch(err => console.log(err));
+          });
       }
     }
   }
@@ -117,7 +115,7 @@ class Home extends Component {
     const successes = [];
     const errors = [];
 
-    fetch(`/jsonapi/goodwidget`, {
+    fetch(`/jsonapi/${this.state.color}list`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
@@ -147,7 +145,7 @@ class Home extends Component {
         }
       })
       .then(() =>
-        fetch(`/jsonapi/completegoodwidgets`, {
+        fetch(`/jsonapi/complete${this.state.color}list`, {
           method: 'GET',
           headers: {
             Authorization: `Bearer ${localStorage.getItem('access_token')}`,
@@ -163,11 +161,10 @@ class Home extends Component {
         }
         return res;
       })
-
       .then(res => res.json())
-      .then(widgets => {
+      .then(list => {
         this.setState({
-          widgets: widgets['good_widgets_and_domains'],
+          widgets: list[`${this.state.color}list`],
           successes,
           errors,
         });
@@ -179,7 +176,7 @@ class Home extends Component {
       <div>
         {!this.state.authenticated && <Redirect to="/" />}
         <GlobalNavBar />
-        <Title />
+        <Title color={this.state.color} />
         {this.state.successes.length > 0 &&
           this.state.successes.map(success => (
             <div

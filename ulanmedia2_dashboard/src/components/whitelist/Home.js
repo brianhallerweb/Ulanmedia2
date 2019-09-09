@@ -4,13 +4,14 @@ import Logout from '../Logout';
 import Title from './Title';
 import Widgets from './Widgets';
 import AddWidget from './AddWidget';
+import GlobalNavBar from '../GlobalNavBar';
 import {Redirect} from 'react-router-dom';
 
 class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      color: this.props.match.params.color,
+      color: 'white',
       widgets: [],
       authenticated: true,
       successes: [],
@@ -174,6 +175,7 @@ class Home extends Component {
     return (
       <div>
         {!this.state.authenticated && <Redirect to="/" />}
+        <GlobalNavBar />
         <Title color={this.state.color} />
         {this.state.successes.length > 0 &&
           this.state.successes.map(success => (

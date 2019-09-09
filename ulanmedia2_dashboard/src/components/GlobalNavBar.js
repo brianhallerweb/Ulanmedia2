@@ -9,19 +9,19 @@ const GlobalNavBar = () => {
       <InternalLink
         className={'globalNavItem'}
         activeClassName={'is-active'}
-        to={'/colorlist/white'}
+        to={'/whitelist'}
         label={'white'}
       />
       <InternalLink
         className={'globalNavItem'}
         activeClassName={'is-active'}
-        to={'/colorlist/grey'}
+        to={'/greylist'}
         label={'grey'}
       />
       <InternalLink
         className={'globalNavItem'}
         activeClassName={'is-active'}
-        to={'/colorlist/black'}
+        to={'/blacklist'}
         label={'black'}
       />
       <InternalLink
