@@ -50,7 +50,8 @@ class CompleteWidgetDomains(Resource):
     def get(self):
         return {f'widget_domains': [widget_domain.json() for widget_domain in
             WidgetDomainModel.query.order_by(WidgetDomainModel.traffic_source,
-                WidgetDomainModel.widget_id, WidgetDomainModel.domain, WidgetDomainModel.widget_domain_source).all()]}
+                WidgetDomainModel.widget_id, WidgetDomainModel.domain,
+                WidgetDomainModel.widget_domain_source).limit(2000).all()]}
         
 
 
