@@ -5,8 +5,24 @@ import ReactTable from 'react-table';
 import 'react-table/react-table.css';
 
 const Widgets = ({widgets, handleDelete}) => {
-  const columns = [{header: 'Widget ID', accessor: 'widget_id'}];
-  return <ReactTable columns={columns} data={widgets} />;
+  const columns = [
+    {Header: 'Widget ID', accessor: 'widget_id', width: 500},
+    {Header: 'test column', accessor: 'widget_id', width: 500},
+  ];
+  return (
+    <div style={{marginTop: 40}}>
+      <ReactTable
+        className={'-highlight -striped'}
+        columns={columns}
+        data={widgets}
+        showPaginationTop={true}
+        showPaginationBottom={false}
+        showPageSizeOptions={false}
+        defaultPageSize={100}
+        minRows={1}
+      />
+    </div>
+  );
 };
 
 //const Widgets = ({widgets, handleDelete}) => {
