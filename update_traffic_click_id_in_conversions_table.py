@@ -63,7 +63,7 @@ def update_traffic_click_id_in_conversions_table():
             mycursor.execute(sql) 
             for count in mycursor: 
                 if count[0] == 0: 
-                    sql = f"INSERT INTO conversions (`id`, `conversion_date`, 'traffic_campaign_id', 'voluum_campaign_id, `traffic_click_id`, `voluum_click_id`,`conversion_type`,`conversion_revenue`) VALUES (NULL, '{postback_timestamp}', '{mgid_campaign_id}', '{vol_campaign_id}', '{mgid_click_id}', '{vol_click_id}', '{conversion_type}', '{revenue}')" 
+                    sql = f"INSERT INTO conversions (`id`, `conversion_date`, `traffic_campaign_id`, `voluum_campaign_id`, `traffic_click_id`, `voluum_click_id`,`conversion_type`,`conversion_revenue`) VALUES (NULL, '{postback_timestamp}', '{mgid_campaign_id}', '{vol_campaign_id}', '{mgid_click_id}', '{vol_click_id}', '{conversion_type}', '{revenue}')" 
                     mycursor.execute(sql) 
     
         mydb.commit() 
