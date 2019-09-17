@@ -49,19 +49,21 @@ def update_traffic_click_id_in_conversions_table():
     res = res.json() 
     for row in res["rows"]: 
         vol_click_id = row["clickId"] 
+        vol_campaign_id = row["campaignId"] 
+        mgid_campaign_id = row["customVariable2"] 
         mgid_click_id = row["externalId"] 
         conversion_type = row["transactionId"] 
         postback_timestamp = row["postbackTimestamp"] 
         postback_timestamp = datetime.strptime(postback_timestamp, '%Y-%m-%d %I:%M:%S %p') 
         revenue = row["revenue"] 
-        sql = f"UPDATE conversions SET traffic_click_id='{mgid_click_id}' WHERE traffic_click_id is NULL AND voluum_click_id='{vol_click_id}'" 
+        sql = f"UPDATE conversions SET traffic_click_id='{mgid_click_id}' AND traffic_campaign_id=mgid_campaign_id AND voluum_campaign_id=vol_campaign_id WHERE traffic_click_id is NULL AND voluum_click_id='{vol_click_id}'" 
         mycursor.execute(sql) 
         if mycursor.rowcount == 0: 
             sql = f"SELECT COUNT(*) FROM conversions WHERE voluum_click_id='{vol_click_id}' AND conversion_type='{conversion_type}'" 
             mycursor.execute(sql) 
             for count in mycursor: 
                 if count[0] == 0: 
-                    sql = f"INSERT INTO conversions (`id`, `conversion_date`, `traffic_click_id`, `voluum_click_id`,`conversion_type`,`conversion_revenue`) VALUES (NULL, '{postback_timestamp}', '{mgid_click_id}', '{vol_click_id}', '{conversion_type}', '{revenue}')" 
+                    sql = f"INSERT INTO conversions (`id`, `conversion_date`, 'traffic_campaign_id', 'vol_campaign_id, `traffic_click_id`, `voluum_click_id`,`conversion_type`,`conversion_revenue`) VALUES (NULL, '{postback_timestamp}', '{mgid_campaign_id}', '{vol_campaign_id}', '{mgid_click_id}', '{vol_click_id}', '{conversion_type}', '{revenue}')" 
                     mycursor.execute(sql) 
     
         mydb.commit() 
