@@ -200,12 +200,12 @@ class Home extends Component {
         Authorization: `Bearer ${localStorage.getItem('access_token')}`,
       },
       body: JSON.stringify({
-        vol_campaign_id: campaignSet.volCampaignID,
-        mgid_campaign_id: campaignSet.mgidCampaignID,
-        campaign_name: campaignSet.campaignName,
-        max_lead_cpa: campaignSet.maxLeadCPA,
-        max_sale_cpa: campaignSet.maxSaleCPA,
-        campaign_status: campaignSet.campaignStatus,
+        vol_campaign_id: campaignSet.vol_campaign_id,
+        mgid_campaign_id: campaignSet.mgid_campaign_id,
+        campaign_name: campaignSet.campaign_name,
+        max_lead_cpa: campaignSet.max_lead_cpa,
+        max_sale_cpa: campaignSet.max_sale_cpa,
+        campaign_status: campaignSet.campaign_status,
       }),
     })
       .then(res => {
