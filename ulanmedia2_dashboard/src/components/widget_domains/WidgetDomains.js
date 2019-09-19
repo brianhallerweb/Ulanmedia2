@@ -1,32 +1,53 @@
 //@format
 import React from 'react';
 import WidgetDomain from './WidgetDomain';
+import ReactTable from 'react-table';
+import 'react-table/react-table.css';
 
 const WidgetDomains = ({widgetDomains, handleDelete}) => {
+  const columns = [
+    {Header: 'Traffic Source', accessor: 'traffic_source', maxwidth: 500},
+    {Header: 'Widget ID', accessor: 'widget_id', maxwidth: 500},
+    {Header: 'Domain', accessor: 'domain', maxwidth: 500},
+    {
+      Header: 'Widget Domain Source',
+      accessor: 'widget_domain_source',
+      maxwidth: 500,
+    },
+    {accessor: 'remove_button', maxwidth: 500},
+  ];
+
   return (
-    <table style={{marginTop: 30, width: '50%'}}>
-      <thead>
-        <tr>
-          <th>Traffic Source</th>
-          <th>Widget ID</th>
-          <th>Domain</th>
-          <th>Widget Domain Source</th>
-          <th />
-        </tr>
-      </thead>
-      <tbody>
-        {widgetDomains.map(widgetDomain => (
-          <WidgetDomain
-            key={widgetDomain.id}
-            trafficSource={widgetDomain.traffic_source}
-            widgetID={widgetDomain.widget_id}
-            domain={widgetDomain.domain}
-            widgetDomainSource={widgetDomain.widget_domain_source}
-            handleDelete={handleDelete}
-          />
-        ))}
-      </tbody>
-    </table>
+    <div style={{marginTop: 40}}>
+      <ReactTable
+        className={'-highlight -striped'}
+        columns={columns}
+        data={widgetDomains}
+        resolveData={data =>
+          data.map(row => {
+            row['remove_button'] = (
+              <button
+                onClick={() =>
+                  handleDelete(
+                    row['traffic_source'],
+                    row['widget_id'],
+                    row['domain'],
+                    row['widget_domain_source'],
+                  )
+                }>
+                Remove
+              </button>
+            );
+            return row;
+          })
+        }
+        showPaginationTop={true}
+        showPaginationBottom={false}
+        showPageSizeOptions={false}
+        defaultPageSize={100}
+        minRows={1}
+      />
+    </div>
   );
 };
 

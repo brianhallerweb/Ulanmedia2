@@ -1,26 +1,37 @@
 //@format
 import React from 'react';
-import Widget from './Widget';
+import ReactTable from 'react-table';
+import 'react-table/react-table.css';
 
 const Widgets = ({widgets, handleDelete}) => {
+  const columns = [
+    {Header: 'Widget ID', accessor: 'widget_id', width: 500},
+    {accessor: 'remove_button', width: 500},
+  ];
+
   return (
-    <table style={{marginTop: 30, width: '50%'}}>
-      <thead>
-        <tr>
-          <th>Widget ID</th>
-          <th />
-        </tr>
-      </thead>
-      <tbody>
-        {widgets.map(widget => (
-          <Widget
-            key={widget.widget_id}
-            widgetID={widget.widget_id}
-            handleDelete={handleDelete}
-          />
-        ))}
-      </tbody>
-    </table>
+    <div style={{marginTop: 40}}>
+      <ReactTable
+        className={'-highlight -striped'}
+        columns={columns}
+        data={widgets}
+        resolveData={data =>
+          data.map(row => {
+            row['remove_button'] = (
+              <button onClick={() => handleDelete(row['widget_id'])}>
+                Remove
+              </button>
+            );
+            return row;
+          })
+        }
+        showPaginationTop={true}
+        showPaginationBottom={false}
+        showPageSizeOptions={false}
+        defaultPageSize={100}
+        minRows={1}
+      />
+    </div>
   );
 };
 
