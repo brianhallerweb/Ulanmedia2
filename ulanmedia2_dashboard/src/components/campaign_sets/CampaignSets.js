@@ -37,7 +37,7 @@ const CampaignSets = ({
     {
       Header: 'Campaign Status',
       accessor: 'campaign_status',
-      Cell: renderEditable,
+      Cell: renderEditableDropdown,
       maxwidth: 500,
     },
     {accessor: 'update_button', maxwidth: 500},
@@ -62,6 +62,20 @@ const CampaignSets = ({
     );
   }
 
+  function renderEditableDropdown(cellInfo) {
+    return (
+      <select
+        defaultValue={cellInfo.original.campaign_status}
+        onChange={e => {
+          const data = [...campaignSets];
+          data[cellInfo.index][cellInfo.column.id] = e.target.value;
+        }}>
+        <option value="active">Active</option>
+        <option value="inactive">Inactive</option>
+      </select>
+    );
+  }
+
   return (
     <div style={{marginTop: 40}}>
       <ReactTable
@@ -70,14 +84,14 @@ const CampaignSets = ({
         data={campaignSets}
         resolveData={data =>
           data.map(row => {
-            row['remove_button'] = (
-              <button onClick={() => handleDelete(row['vol_campaign_id'])}>
-                Remove
-              </button>
-            );
             row['update_button'] = (
               <button onClick={() => handleUpdateCampaignSet(row)}>
                 Update
+              </button>
+            );
+            row['remove_button'] = (
+              <button onClick={() => handleDelete(row['vol_campaign_id'])}>
+                Remove
               </button>
             );
             return row;
