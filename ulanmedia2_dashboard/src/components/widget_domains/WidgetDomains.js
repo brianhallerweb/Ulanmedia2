@@ -1,6 +1,5 @@
 //@format
 import React from 'react';
-import WidgetDomain from './WidgetDomain';
 import ReactTable from 'react-table';
 import 'react-table/react-table.css';
 
@@ -25,6 +24,12 @@ const WidgetDomains = ({widgetDomains, handleDelete}) => {
         data={widgetDomains}
         resolveData={data =>
           data.map(row => {
+            const domain = row['domain'];
+            row['domain'] = (
+              <a href={`https://refererhider.com/?http://${domain}`}>
+                {domain}
+              </a>
+            );
             row['remove_button'] = (
               <button
                 onClick={() =>
@@ -41,8 +46,6 @@ const WidgetDomains = ({widgetDomains, handleDelete}) => {
             return row;
           })
         }
-        showPaginationTop={true}
-        showPaginationBottom={false}
         showPageSizeOptions={false}
         defaultPageSize={100}
         minRows={1}

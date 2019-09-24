@@ -25,8 +25,6 @@ const Widgets = ({widgets, handleDelete}) => {
             return row;
           })
         }
-        showPaginationTop={true}
-        showPaginationBottom={false}
         showPageSizeOptions={false}
         defaultPageSize={100}
         minRows={1}

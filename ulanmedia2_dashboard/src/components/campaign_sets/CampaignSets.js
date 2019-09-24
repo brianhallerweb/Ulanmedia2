@@ -2,6 +2,7 @@
 import React from 'react';
 import ReactTable from 'react-table';
 import 'react-table/react-table.css';
+import SummaryRow from './SummaryRow';
 
 const CampaignSets = ({
   campaignSets,
@@ -78,6 +79,7 @@ const CampaignSets = ({
 
   return (
     <div style={{marginTop: 40}}>
+      <SummaryRow campaignSets={campaignSets} />
       <ReactTable
         className={'-highlight -striped'}
         columns={columns}
@@ -97,8 +99,6 @@ const CampaignSets = ({
             return row;
           })
         }
-        showPaginationTop={true}
-        showPaginationBottom={false}
         showPageSizeOptions={false}
         defaultPageSize={100}
         minRows={1}
