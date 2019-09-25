@@ -96,8 +96,9 @@ def monitor_whitelist_campaigns():
                 print(f"widget {widget_id} not in whitelist but is already excluded")
             else:
                 print(f"widget {widget_id} needs to be paused")
-                # url to use for pausing
-                # https://api.mgid.com/v1/goodhits/clients/{$mgidClientID}/campaigns/{$traffic_campaign_id}?token={$mgid_access_token}&widgetsFilterUid=include,except,{$widget_id}
+                url = "https://api.mgid.com/v1/goodhits/clients/{mgid_client_id}/campaigns/{campaign_id}?token={token}&widgetsFilterUid=include,except,{widget_id}"
+                res = requests.get(url)
+                print(res.json())
 
 
 monitor_whitelist_campaigns()
