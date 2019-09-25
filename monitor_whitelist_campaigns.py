@@ -63,16 +63,17 @@ def monitor_whitelist_campaigns():
         res = requests.get(url)
         res = res.json()
         excluded_widgets = []
-        for key, value in res["widgetsFilterUid"]["widgets"].items():
-            if (value == "[]") | (value == None):
-                excluded_widgets.append(key)
-            else:
-                value = value.replace("[", "")
-                value = value.replace("]", "")
-                value = value.replace(",", "")
-                c_widgets = value.split(" ")
-                for c_widget in c_widgets:
-                    excluded_widgets.append(f"{key}s{c_widget}")
+        if len(res["widgetsFilterUid"]["widgets"]) > 0:
+            for key, value in res["widgetsFilterUid"]["widgets"].items():
+                if (value == "[]") | (value == None):
+                    excluded_widgets.append(key)
+                else:
+                    value = value.replace("[", "")
+                    value = value.replace("]", "")
+                    value = value.replace(",", "")
+                    c_widgets = value.split(" ")
+                    for c_widget in c_widgets:
+                        excluded_widgets.append(f"{key}s{c_widget}")
 
         sql = f"SELECT widget_id from whitelist_campaigns WHERE traffic_campaign_id = '{campaign_id}'"
         mycursor.execute(sql)
