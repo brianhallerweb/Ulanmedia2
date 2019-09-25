@@ -14,6 +14,10 @@ const Widgets = ({widgets, handleDelete}) => {
     <div style={{marginTop: 40}}>
       <ReactTable
         className={'-highlight -striped'}
+	          style={{
+          height: '96vh',
+        }}
+
         columns={columns}
         data={widgets}
         resolveData={data =>
