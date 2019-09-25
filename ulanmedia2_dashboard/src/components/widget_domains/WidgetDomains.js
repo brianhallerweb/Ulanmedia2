@@ -19,6 +19,9 @@ const WidgetDomains = ({widgetDomains, handleDelete}) => {
   return (
     <div style={{marginTop: 40}}>
       <ReactTable
+        style={{
+          height: '96vh',
+        }}
         className={'-highlight -striped'}
         columns={columns}
         data={widgetDomains}
