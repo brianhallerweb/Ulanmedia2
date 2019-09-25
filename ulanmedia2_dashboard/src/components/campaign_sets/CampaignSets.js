@@ -93,7 +93,7 @@ const CampaignSets = ({
     <div style={{marginTop: 40}}>
       <ReactTable
         style={{
-          height: '900px',
+          height: '50vh',
         }}
         className={'-highlight -striped'}
         columns={columns}
