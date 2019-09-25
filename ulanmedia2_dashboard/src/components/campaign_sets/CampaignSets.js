@@ -1,8 +1,8 @@
 //@format
 import React from 'react';
 import ReactTable from 'react-table';
-import 'react-table/react-table.css';
-import SummaryRow from './SummaryRow';
+import '../../styles/react-table.css';
+import _ from 'lodash';
 
 const CampaignSets = ({
   campaignSets,
@@ -24,16 +24,38 @@ const CampaignSets = ({
       maxwidth: 500,
     },
     {
-      Header: 'Max Lead CPA',
-      accessor: 'max_lead_cpa',
-      Cell: renderEditable,
+      Header: (
+        <span>
+          <strong>Sum:</strong>{' '}
+          {_.round(_.sum(_.map(campaignSets, d => d.max_lead_cpa)))}
+        </span>
+      ),
       maxwidth: 500,
+      columns: [
+        {
+          Header: 'Max Lead CPA',
+          accessor: 'max_lead_cpa',
+          Cell: renderEditable,
+          maxwidth: 500,
+        },
+      ],
     },
     {
-      Header: 'Max Sale CPA',
-      accessor: 'max_sale_cpa',
-      Cell: renderEditable,
+      Header: (
+        <span>
+          <strong>Sum:</strong>{' '}
+          {_.round(_.sum(_.map(campaignSets, d => d.max_sale_cpa)))}
+        </span>
+      ),
       maxwidth: 500,
+      columns: [
+        {
+          Header: 'Max Sale CPA',
+          accessor: 'max_sale_cpa',
+          Cell: renderEditable,
+          maxwidth: 500,
+        },
+      ],
     },
     {
       Header: 'Campaign Status',
@@ -79,7 +101,6 @@ const CampaignSets = ({
 
   return (
     <div style={{marginTop: 40}}>
-      <SummaryRow campaignSets={campaignSets} />
       <ReactTable
         className={'-highlight -striped'}
         columns={columns}
