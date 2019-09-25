@@ -14,48 +14,38 @@ const CampaignSets = ({
     {
       Header: 'Vol Campaign ID',
       accessor: 'vol_campaign_id',
-      maxwidth: 500,
+      width: 375,
     },
-    {Header: 'MGID Campaign ID', accessor: 'mgid_campaign_id', maxwidth: 500},
+    {Header: 'MGID Campaign ID', accessor: 'mgid_campaign_id', maxwidth: 300},
     {
       Header: 'Campaign Name',
       accessor: 'campaign_name',
       Cell: renderEditable,
-      maxwidth: 500,
+      width: 375,
     },
     {
-      Header: (
+      Header: 'Max Lead CPA',
+      accessor: 'max_lead_cpa',
+      Cell: renderEditable,
+      Footer: (
         <span>
           <strong>Sum:</strong>{' '}
           {_.round(_.sum(_.map(campaignSets, d => d.max_lead_cpa)))}
         </span>
       ),
       maxwidth: 500,
-      columns: [
-        {
-          Header: 'Max Lead CPA',
-          accessor: 'max_lead_cpa',
-          Cell: renderEditable,
-          maxwidth: 500,
-        },
-      ],
     },
     {
-      Header: (
+      Header: 'Max Sale CPA',
+      accessor: 'max_sale_cpa',
+      Cell: renderEditable,
+      Footer: (
         <span>
           <strong>Sum:</strong>{' '}
           {_.round(_.sum(_.map(campaignSets, d => d.max_sale_cpa)))}
         </span>
       ),
       maxwidth: 500,
-      columns: [
-        {
-          Header: 'Max Sale CPA',
-          accessor: 'max_sale_cpa',
-          Cell: renderEditable,
-          maxwidth: 500,
-        },
-      ],
     },
     {
       Header: 'Campaign Status',
@@ -102,6 +92,9 @@ const CampaignSets = ({
   return (
     <div style={{marginTop: 40}}>
       <ReactTable
+        style={{
+          height: '900px',
+        }}
         className={'-highlight -striped'}
         columns={columns}
         data={campaignSets}
