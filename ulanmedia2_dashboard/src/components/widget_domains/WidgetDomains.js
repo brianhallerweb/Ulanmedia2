@@ -5,15 +5,22 @@ import '../../styles/react-table.css';
 
 const WidgetDomains = ({widgetDomains, handleDelete}) => {
   const columns = [
-    {Header: 'Traffic Source', accessor: 'traffic_source', maxwidth: 500},
-    {Header: 'Widget ID', accessor: 'widget_id', maxwidth: 500},
-    {Header: 'Domain', accessor: 'domain', maxwidth: 500},
+    {
+      Header: '',
+      id: 'row',
+      Cell: row => <div>{` ${row.index + 1}`}</div>,
+      minWidth: 50,
+      Footer: <span>{widgetDomains.length}</span>,
+    },
+    {Header: 'Traffic Source', accessor: 'traffic_source', maxWidth: 500},
+    {Header: 'Widget ID', accessor: 'widget_id', maxWidth: 500},
+    {Header: 'Domain', accessor: 'domain', maxWidth: 500},
     {
       Header: 'Widget Domain Source',
       accessor: 'widget_domain_source',
       maxwidth: 500,
     },
-    {accessor: 'remove_button', maxwidth: 500},
+    {accessor: 'remove_button', maxWidth: 500},
   ];
 
   return (

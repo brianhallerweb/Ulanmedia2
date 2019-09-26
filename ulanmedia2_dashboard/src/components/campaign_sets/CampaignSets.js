@@ -12,6 +12,13 @@ const CampaignSets = ({
 }) => {
   const columns = [
     {
+      Header: '',
+      id: 'row',
+      Cell: row => <div>{` ${row.index + 1}`}</div>,
+      minWidth: 50,
+      Footer: <span>{campaignSets.length}</span>,
+    },
+    {
       Header: 'Vol Campaign ID',
       accessor: 'vol_campaign_id',
       width: 375,
@@ -33,7 +40,7 @@ const CampaignSets = ({
           {_.round(_.sum(_.map(campaignSets, d => d.max_lead_cpa)))}
         </span>
       ),
-      maxwidth: 500,
+      maxWidth: 500,
     },
     {
       Header: 'Max Sale CPA',
@@ -45,16 +52,16 @@ const CampaignSets = ({
           {_.round(_.sum(_.map(campaignSets, d => d.max_sale_cpa)))}
         </span>
       ),
-      maxwidth: 500,
+      maxWidth: 500,
     },
     {
       Header: 'Campaign Status',
       accessor: 'campaign_status',
       Cell: renderEditableDropdown,
-      maxwidth: 500,
+      maxWidth: 500,
     },
-    {accessor: 'update_button', maxwidth: 500},
-    {accessor: 'remove_button', maxwidth: 500},
+    {accessor: 'update_button', maxWidth: 500},
+    {accessor: 'remove_button', maxWidth: 500},
   ];
 
   function renderEditable(cellInfo) {

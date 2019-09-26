@@ -37,7 +37,7 @@ class Home extends Component {
       })
       .then(res => res.json())
       .then(list => {
-        this.setState({widgets: list[`${this.state.color}list`]});
+        this.setState({widgets: list[`color_widgets_and_domains`]});
       });
   }
 
@@ -172,6 +172,7 @@ class Home extends Component {
   }
 
   render() {
+    console.log(this.state.widgets);
     return (
       <div>
         {!this.state.authenticated && <Redirect to="/" />}

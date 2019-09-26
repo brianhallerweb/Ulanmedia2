@@ -5,7 +5,15 @@ import '../../styles/react-table.css';
 
 const Widgets = ({widgets, handleDelete}) => {
   const columns = [
+    {
+      Header: '',
+      id: 'row',
+      Cell: row => <div>{` ${row.index + 1}`}</div>,
+      minWidth: 50,
+      Footer: <span>{widgets.length}</span>,
+    },
     {Header: 'Widget ID', accessor: 'widget_id', width: 500},
+    {Header: 'Domain', accessor: 'domain', width: 500},
     {accessor: 'remove_button', width: 500},
   ];
 
@@ -13,10 +21,9 @@ const Widgets = ({widgets, handleDelete}) => {
     <div style={{marginTop: 40}}>
       <ReactTable
         className={'-highlight -striped'}
-	          style={{
+        style={{
           height: '96vh',
         }}
-
         columns={columns}
         data={widgets}
         resolveData={data =>

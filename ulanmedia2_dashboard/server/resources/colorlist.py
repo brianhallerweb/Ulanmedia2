@@ -2,6 +2,9 @@ from flask_restful import Resource
 from flask import request
 from flask_jwt_extended import jwt_required
 from ulanmedia2_dashboard.server.models.colorlist import ColorlistModel
+from ulanmedia2_dashboard.server.models.widget_domain import WidgetDomainModel
+from ulanmedia2_dashboard.server.db import db
+
 
 
 class Colorlist(Resource):
@@ -51,10 +54,30 @@ class Colorlist(Resource):
 
 class CompleteColorlist(Resource):
 
+    # @jwt_required
+    # def get(self, color):
+        # return {f'{color}list': [colorlist.json() for colorlist in
+            # ColorlistModel.query.filter_by(color=color)]}
+
     @jwt_required
     def get(self, color):
-        return {f'{color}list': [colorlist.json() for colorlist in
-            ColorlistModel.query.filter_by(color=color)]}
+        query_results = db.session.query(ColorlistModel, WidgetDomainModel).outerjoin(WidgetDomainModel, ColorlistModel.widget_id == WidgetDomainModel.widget_id).all()
+        json_to_return = {'color_widgets_and_domains':[]}
+        for result in query_results:
+            if result[1] != None:
+                widget_id = result[0].json()['widget_id']
+                domain = result[1].json()['domain']
+                row = {'widget_id': widget_id, 'domain': domain}
+            else:
+                widget_id = result[0].json()['widget_id']
+                row = {'widget_id': widget_id, 'domain': None}
+            json_to_return['color_widgets_and_domains'].append(row)
+
+        return json_to_return    
+
+
+
+
         
 
 
