@@ -54,26 +54,26 @@ class Colorlist(Resource):
 
 class CompleteColorlist(Resource):
 
-    # @jwt_required
-    # def get(self, color):
-        # return {f'{color}list': [colorlist.json() for colorlist in
-            # ColorlistModel.query.filter_by(color=color)]}
-
     @jwt_required
     def get(self, color):
-        query_results = db.session.query(ColorlistModel, WidgetDomainModel).outerjoin(WidgetDomainModel, ColorlistModel.widget_id == WidgetDomainModel.widget_id).all()
+        query_results = db.session.query(ColorlistModel,
+                WidgetDomainModel).filter_by(color=color).outerjoin(WidgetDomainModel,
+                        ColorlistModel.widget_id ==
+                        WidgetDomainModel.widget_id).all()
         json_to_return = {'color_widgets_and_domains':[]}
         for result in query_results:
             if result[1] != None:
+                # this is when there is a domain to match the color widget
                 widget_id = result[0].json()['widget_id']
                 domain = result[1].json()['domain']
                 row = {'widget_id': widget_id, 'domain': domain}
             else:
+                # this is when there isn't a domain to match the color widget
                 widget_id = result[0].json()['widget_id']
                 row = {'widget_id': widget_id, 'domain': None}
             json_to_return['color_widgets_and_domains'].append(row)
-
         return json_to_return    
+
 
 
 

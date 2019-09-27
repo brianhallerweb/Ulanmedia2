@@ -172,7 +172,6 @@ class Home extends Component {
   }
 
   render() {
-    console.log(this.state.widgets);
     return (
       <div>
         {!this.state.authenticated && <Redirect to="/" />}
