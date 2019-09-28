@@ -28,6 +28,11 @@ const Widgets = ({widgets, handleDelete}) => {
         data={widgets}
         resolveData={data =>
           data.map(row => {
+            row['domain'] = (
+              <a href={`https://refererhider.com/?http://${domain}`}>
+                {domain}
+              </a>
+            );
             row['remove_button'] = (
               <button onClick={() => handleDelete(row['widget_id'])}>
                 Remove
