@@ -22,7 +22,7 @@ const Widgets = ({widgets, handleDelete}) => {
       <ReactTable
         className={'-highlight -striped'}
         style={{
-          height: '96vh',
+          maxHeight: '96vh',
         }}
         columns={columns}
         data={widgets}
@@ -34,7 +34,6 @@ const Widgets = ({widgets, handleDelete}) => {
                 {domain}
               </a>
             );
-
             row['remove_button'] = (
               <button onClick={() => handleDelete(row['widget_id'])}>
                 Remove
