@@ -104,6 +104,12 @@ const CampaignSets = ({
         }}
         className={'-highlight -striped'}
         columns={columns}
+        defaultSorted={[
+          {
+            id: 'campaign_name',
+            desc: false,
+          },
+        ]}
         data={campaignSets}
         resolveData={data =>
           data.map(row => {
