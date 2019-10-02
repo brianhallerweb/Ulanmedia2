@@ -43,8 +43,8 @@ class Widgets extends Component {
           style={{
             maxHeight: '96vh',
           }}
-          columns={columns}
-          data={widgets}
+          columns={this.columns}
+          data={this.props.widgets}
           resolveData={data =>
             data.map(row => {
               const domain = row['domain'];
