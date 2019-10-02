@@ -2,6 +2,7 @@
 import React, {Component} from 'react';
 import ReactTable from 'react-table';
 import '../../styles/react-table.css';
+
 class Widgets extends Component {
   constructor(props) {
     super(props);
@@ -20,11 +21,6 @@ class Widgets extends Component {
   render() {
     return (
       <div style={{marginTop: 40}}>
-        <div>
-          {this.state.pageNumber * this.state.pageSize + 1}-
-          {this.state.pageNumber * this.state.pageSize + this.state.pageRows} of{' '}
-          {this.props.widgets.length}
-        </div>
         <ReactTable
           getPaginationProps={p => {
             let pageNumber = p.page;
@@ -46,7 +42,7 @@ class Widgets extends Component {
           }}
           className={'-highlight -striped'}
           style={{
-            maxHeight: '96vh',
+            maxHeight: '90vh',
           }}
           columns={this.columns}
           data={this.props.widgets}
@@ -68,9 +64,15 @@ class Widgets extends Component {
             });
           }}
           showPageSizeOptions={false}
-          defaultPageSize={3}
+          defaultPageSize={20}
           minRows={1}
         />
+
+        <div style={{textAlign: 'center', paddingTop: 10}}>
+          Rows {this.state.pageNumber * this.state.pageSize + 1}-
+          {this.state.pageNumber * this.state.pageSize + this.state.pageRows} of{' '}
+          {this.props.widgets.length}
+        </div>
       </div>
     );
   }
