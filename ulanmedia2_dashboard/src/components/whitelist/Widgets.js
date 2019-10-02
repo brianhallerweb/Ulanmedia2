@@ -26,7 +26,6 @@ class Widgets extends Component {
             let pageNumber = p.page;
             let pageSize = p.pageSize;
             let pageRows = p.pageRows.length;
-            console.log(pageRows);
             if (
               pageNumber !== this.state.pageNumber ||
               pageSize !== this.state.pageSize ||
@@ -47,7 +46,6 @@ class Widgets extends Component {
           columns={this.columns}
           data={this.props.widgets}
           resolveData={data => {
-            console.log(data);
             return data.map(row => {
               const domain = row['domain'];
               row['domain'] = (
