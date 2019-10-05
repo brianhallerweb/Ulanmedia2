@@ -58,9 +58,10 @@ class CampaignSets extends Component {
         accessor: 'campaign_status',
         Cell: this.renderEditableDropdown.bind(this),
         maxWidth: 500,
+        sortable: false,
       },
-      {accessor: 'update_button', maxWidth: 500},
-      {accessor: 'remove_button', maxWidth: 500},
+      {accessor: 'update_button', maxWidth: 500, sortable: false},
+      {accessor: 'remove_button', maxWidth: 500, sortable: false},
     ];
   }
 

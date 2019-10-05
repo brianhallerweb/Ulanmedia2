@@ -14,13 +14,22 @@ class WidgetDomains extends Component {
     this.columns = [
       {Header: 'Traffic Source', accessor: 'traffic_source', maxWidth: 500},
       {Header: 'Widget ID', accessor: 'widget_id', maxWidth: 500},
-      {Header: 'Domain', accessor: 'domain', maxWidth: 500},
+      {
+        Header: 'Domain',
+        accessor: 'domain',
+        maxWidth: 500,
+        Cell: rowInfo => (
+          <a href={`https://refererhider.com/?http://${rowInfo.row.domain}`}>
+            {rowInfo.row.domain}
+          </a>
+        ),
+      },
       {
         Header: 'Widget Domain Source',
         accessor: 'widget_domain_source',
         maxwidth: 500,
       },
-      {accessor: 'remove_button', maxWidth: 500},
+      {accessor: 'remove_button', maxWidth: 500, sortable: false},
     ];
   }
 
@@ -53,12 +62,6 @@ class WidgetDomains extends Component {
           data={this.props.widgetDomains}
           resolveData={data =>
             data.map(row => {
-              const domain = row['domain'];
-              row['domain'] = (
-                <a href={`https://refererhider.com/?http://${domain}`}>
-                  {domain}
-                </a>
-              );
               row['remove_button'] = (
                 <button
                   onClick={() =>
@@ -78,6 +81,12 @@ class WidgetDomains extends Component {
           showPageSizeOptions={false}
           defaultPageSize={100}
           minRows={1}
+          defaultSorted={[
+            {
+              id: 'domain',
+              desc: false,
+            },
+          ]}
         />
 
         <div style={{textAlign: 'center', paddingTop: 10}}>

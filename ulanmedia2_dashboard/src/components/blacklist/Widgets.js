@@ -13,7 +13,16 @@ class Widgets extends Component {
     };
     this.columns = [
       {Header: 'Widget ID', accessor: 'widget_id', width: 500},
-      {Header: 'Domain', accessor: 'domain', width: 500},
+      {
+        Header: 'Domain',
+        accessor: 'domain',
+        width: 500,
+        Cell: rowInfo => (
+          <a href={`https://refererhider.com/?http://${rowInfo.row.domain}`}>
+            {rowInfo.row.domain}
+          </a>
+        ),
+      },
       {accessor: 'remove_button', width: 500},
     ];
   }
@@ -47,12 +56,6 @@ class Widgets extends Component {
           data={this.props.widgets}
           resolveData={data => {
             return data.map(row => {
-              const domain = row['domain'];
-              row['domain'] = (
-                <a href={`https://refererhider.com/?http://${domain}`}>
-                  {domain}
-                </a>
-              );
               row['remove_button'] = (
                 <button onClick={() => handleDelete(row['widget_id'])}>
                   Remove
@@ -77,4 +80,3 @@ class Widgets extends Component {
 }
 
 export default Widgets;
-
