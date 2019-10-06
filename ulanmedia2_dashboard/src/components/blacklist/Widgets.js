@@ -57,7 +57,8 @@ class Widgets extends Component {
           resolveData={data => {
             return data.map(row => {
               row['remove_button'] = (
-                <button onClick={() => handleDelete(row['widget_id'])}>
+                <button
+                  onClick={() => this.props.handleDelete(row['widget_id'])}>
                   Remove
                 </button>
               );
