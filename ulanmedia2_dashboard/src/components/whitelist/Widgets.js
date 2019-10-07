@@ -65,7 +65,7 @@ class Widgets extends Component {
             });
           }}
           showPageSizeOptions={false}
-          defaultPageSize={20}
+          defaultPageSize={100}
           minRows={1}
         />
 
