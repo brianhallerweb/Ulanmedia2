@@ -23,7 +23,7 @@ class Widgets extends Component {
           </a>
         ),
       },
-      {accessor: 'remove_button', width: 500},
+      {accessor: 'remove_button', width: 500, filterable: false},
     ];
   }
 
@@ -31,6 +31,10 @@ class Widgets extends Component {
     return (
       <div style={{marginTop: 40}}>
         <ReactTable
+          filterable
+          defaultFilterMethod={(filter, row) =>
+            String(row[filter.id]).startsWith(filter.value)
+          }
           getPaginationProps={p => {
             let pageNumber = p.page;
             let pageSize = p.pageSize;

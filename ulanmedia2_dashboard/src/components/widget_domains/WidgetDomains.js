@@ -29,7 +29,12 @@ class WidgetDomains extends Component {
         accessor: 'widget_domain_source',
         maxwidth: 500,
       },
-      {accessor: 'remove_button', maxWidth: 500, sortable: false},
+      {
+        accessor: 'remove_button',
+        maxWidth: 500,
+        sortable: false,
+        filterable: false,
+      },
     ];
   }
 
@@ -37,6 +42,10 @@ class WidgetDomains extends Component {
     return (
       <div style={{marginTop: 40}}>
         <ReactTable
+          filterable
+          defaultFilterMethod={(filter, row) =>
+            String(row[filter.id]).startsWith(filter.value)
+          }
           getPaginationProps={p => {
             let pageNumber = p.page;
             let pageSize = p.pageSize;

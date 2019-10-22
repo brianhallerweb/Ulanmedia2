@@ -12,7 +12,12 @@ class Widgets extends Component {
       pageRows: 0,
     };
     this.columns = [
-      {Header: 'Widget ID', accessor: 'widget_id', width: 500},
+      {
+        Header: 'Widget ID',
+        accessor: 'widget_id',
+        width: 500,
+        filterMethod: (filter, row) => row[filter.id].startsWith(filter.value),
+      },
       {
         Header: 'Domain',
         accessor: 'domain',
@@ -23,7 +28,7 @@ class Widgets extends Component {
           </a>
         ),
       },
-      {accessor: 'remove_button', width: 500},
+      {accessor: 'remove_button', width: 500, filterable: false},
     ];
   }
 
@@ -31,6 +36,10 @@ class Widgets extends Component {
     return (
       <div style={{marginTop: 40}}>
         <ReactTable
+          filterable
+          defaultFilterMethod={(filter, row) =>
+            String(row[filter.id]).startsWith(filter.value)
+          }
           getPaginationProps={p => {
             let pageNumber = p.page;
             let pageSize = p.pageSize;

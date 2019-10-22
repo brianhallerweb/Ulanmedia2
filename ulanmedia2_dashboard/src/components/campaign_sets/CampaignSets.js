@@ -59,9 +59,20 @@ class CampaignSets extends Component {
         Cell: this.renderEditableDropdown.bind(this),
         maxWidth: 500,
         sortable: false,
+        filterable: false,
       },
-      {accessor: 'update_button', maxWidth: 500, sortable: false},
-      {accessor: 'remove_button', maxWidth: 500, sortable: false},
+      {
+        accessor: 'update_button',
+        maxWidth: 500,
+        sortable: false,
+        filterable: false,
+      },
+      {
+        accessor: 'remove_button',
+        maxWidth: 500,
+        sortable: false,
+        filterable: false,
+      },
     ];
   }
 
@@ -100,6 +111,10 @@ class CampaignSets extends Component {
     return (
       <div style={{marginTop: 40}}>
         <ReactTable
+          filterable
+          defaultFilterMethod={(filter, row) =>
+            String(row[filter.id]).startsWith(filter.value)
+          }
           getPaginationProps={p => {
             let pageNumber = p.page;
             let pageSize = p.pageSize;
