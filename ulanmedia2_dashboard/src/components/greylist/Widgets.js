@@ -33,7 +33,7 @@ class Widgets extends Component {
         <ReactTable
           filterable
           defaultFilterMethod={(filter, row) =>
-            String(row[filter.id]).startsWith(filter.value)
+            String(row[filter.id]).includes(filter.value)
           }
           getPaginationProps={p => {
             let pageNumber = p.page;
