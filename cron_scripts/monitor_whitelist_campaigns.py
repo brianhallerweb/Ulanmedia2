@@ -8,6 +8,7 @@ from ulanmedia2_config.config import *
 from utility_functions.create_complete_campaign_sets import create_complete_campaign_sets
 from get_vol_id_from_mgid_id import get_vol_id_from_mgid_id
 from get_campaign_name_from_mgid_id import get_campaign_name_from_mgid_id
+from utility_functions.send_email import send_email
 
 import pprint
 pp=pprint.PrettyPrinter(indent=2)
@@ -104,7 +105,7 @@ def monitor_whitelist_campaigns():
                     #print(response.json())
     except Exception as e:
         print("Failed - email sent")
-        send_email("brianshaller@gmail.com", "Failed - create_campaigns_for_all_campaigns_dataset()", e)
+        send_email("brianshaller@gmail.com", "Failed - monitor_whitelist_campaigns()", e)
         sys.exit()
 
 
